@@ -88,7 +88,7 @@ const Header = () => {
                 display: { xs: "none", sm: "block" },
               }}
             >
-              Chattu
+              studdybuddy
             </Typography>
 
             <Box

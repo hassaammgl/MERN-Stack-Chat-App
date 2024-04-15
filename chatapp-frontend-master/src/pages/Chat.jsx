@@ -5,11 +5,15 @@ import React, {
   useRef,
   useState,
 } from "react";
+import data from '@emoji-mart/data'
+import Picker from '@emoji-mart/react'
+import EmojiPicker from "emoji-picker-react";
 import AppLayout from "../components/layout/AppLayout";
-import { IconButton, Skeleton, Stack } from "@mui/material";
+import { Dialog, IconButton, Skeleton, Stack } from "@mui/material";
 import { grayColor, orange } from "../constants/color";
 import {
   AttachFile as AttachFileIcon,
+  EmojiEmotionsOutlined,
   Send as SendIcon,
 } from "@mui/icons-material";
 import { InputBox } from "../components/styles/StyledComponents";
@@ -45,6 +49,7 @@ const Chat = ({ chatId, user }) => {
   const [messages, setMessages] = useState([]);
   const [page, setPage] = useState(1);
   const [fileMenuAnchor, setFileMenuAnchor] = useState(null);
+  const [emojiMenuOpen, setEmojiMenuOpen] = useState(false)
 
   const [IamTyping, setIamTyping] = useState(false);
   const [userTyping, setUserTyping] = useState(false);
@@ -227,10 +232,31 @@ const Chat = ({ chatId, user }) => {
           >
             <AttachFileIcon />
           </IconButton>
+          <IconButton
+            onClick={() => {
+              setEmojiMenuOpen(true);
+            }}
+            sx={{
+              position: "absolute",
+              left: "-.5rem",
+            }}>
+            <EmojiEmotionsOutlined />
+          </IconButton>
+          <Dialog
+            open={emojiMenuOpen}
+            keepMounted
+            onClose={() => setEmojiMenuOpen(false)}
+          >
+
+            <EmojiPicker onEmojiClick={(e) => setMessage(message + e.emoji)} />
+          </Dialog>
 
           <InputBox
             placeholder="Type Message Here..."
             value={message}
+            sx={{
+              width: "100%",
+            }}
             onChange={messageOnChange}
           />
 

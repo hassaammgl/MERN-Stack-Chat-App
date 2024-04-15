@@ -15,7 +15,6 @@ import {
   Typography,
 } from "@mui/material";
 import moment from "moment";
-import React from "react";
 import AdminLayout from "../../components/layout/AdminLayout";
 import { DoughnutChart, LineChart } from "../../components/specific/Charts";
 import {
@@ -42,31 +41,32 @@ const Dashboard = () => {
   ]);
 
   const Appbar = (
-    <Paper
-      elevation={3}
-      sx={{ padding: "2rem", margin: "2rem 0", borderRadius: "1rem" }}
-    >
-      <Stack direction={"row"} alignItems={"center"} spacing={"1rem"}>
-        <AdminPanelSettingsIcon sx={{ fontSize: "3rem" }} />
+    <></>
+    // <Paper
+    //   elevation={3}
+    //   sx={{ padding: "2rem", margin: "2rem 0", borderRadius: "1rem" }}
+    // >
+    //   {/* <Stack direction={"row"} alignItems={"center"} spacing={"1rem"}>
+    //     <AdminPanelSettingsIcon sx={{ fontSize: "3rem" }} />
 
-        <SearchField placeholder="Search..." />
+    //     <SearchField placeholder="Search..." />
 
-        <CurveButton>Search</CurveButton>
-        <Box flexGrow={1} />
-        <Typography
-          display={{
-            xs: "none",
-            lg: "block",
-          }}
-          color={"rgba(0,0,0,0.7)"}
-          textAlign={"center"}
-        >
-          {moment().format("dddd, D MMMM YYYY")}
-        </Typography>
+    //     <CurveButton>Search</CurveButton>
+    //     <Box flexGrow={1} />
+    //     <Typography
+    //       display={{
+    //         xs: "none",
+    //         lg: "block",
+    //       }}
+    //       color={"rgba(0,0,0,0.7)"}
+    //       textAlign={"center"}
+    //     >
+    //       {moment().format("dddd, D MMMM YYYY")}
+    //     </Typography>
 
-        <NotificationsIcon />
-      </Stack>
-    </Paper>
+    //     <NotificationsIcon />
+    //   </Stack> */}
+    // </Paper>
   );
 
   const Widgets = (
@@ -103,6 +103,7 @@ const Dashboard = () => {
           {Appbar}
 
           <Stack
+            marginTop={"3rem"}
             direction={{
               xs: "column",
               lg: "row",
