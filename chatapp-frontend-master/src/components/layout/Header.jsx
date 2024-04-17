@@ -10,6 +10,8 @@ import {
 } from "@mui/material";
 import React, { Suspense, lazy, useState } from "react";
 import { orange } from "../../constants/color";
+// import study from "../../../public/studdybuddy.jpeg"
+import study from "../../assets/buddystudy.png";
 import {
   Add as AddIcon,
   Menu as MenuIcon,
@@ -78,7 +80,8 @@ const Header = () => {
         <AppBar
           position="static"
           sx={{
-            bgcolor: orange,
+              bgcolor: 'black',
+              borderBottom: '2px solid gray',
           }}
         >
           <Toolbar>
@@ -88,7 +91,7 @@ const Header = () => {
                 display: { xs: "none", sm: "block" },
               }}
             >
-              studdybuddy
+              <img src={study} alt="StuddyBuddy" style={{ width: '145px', height: '50px', marginTop: '5px' }} />
             </Typography>
 
             <Box
