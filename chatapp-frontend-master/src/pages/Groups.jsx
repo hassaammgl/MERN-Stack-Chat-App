@@ -164,9 +164,6 @@ const Groups = () => {
 
   const IconBtns = (
     <>
-      {/* <div>
-        <Header />
-      </div> */}
       <Box
         sx={{
           display: {

@@ -191,6 +191,7 @@ const Chat = ({ chatId, user }) => {
       <Stack
         ref={containerRef}
         boxSizing={"border-box"}
+        marginLeft={"1rem"}
         padding={"1rem"}
         spacing={"1rem"}
         bgcolor={grayColor}
