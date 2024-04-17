@@ -11,11 +11,12 @@ import {
 import React, { Suspense, lazy, useState } from "react";
 import { orange } from "../../constants/color";
 // import study from "../../../public/studdybuddy.jpeg"
+import { IoMdPersonAdd } from "react-icons/io";
 import study from "../../assets/buddystudy.png";
 import {
   Add as AddIcon,
   Menu as MenuIcon,
-  Search as SearchIcon,
+  // Search as SearchIcon,
   Group as GroupIcon,
   Logout as LogoutIcon,
   Notifications as NotificationsIcon,
@@ -110,7 +111,8 @@ const Header = () => {
             <Box>
               <IconBtn
                 title={"Search"}
-                icon={<SearchIcon />}
+                // icon={<SearchIcon />}
+                icon={<IoMdPersonAdd />}
                 onClick={openSearch}
               />
 
