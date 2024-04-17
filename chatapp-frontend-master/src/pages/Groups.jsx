@@ -301,7 +301,9 @@ const Groups = () => {
 
             <Typography
               margin={"2rem"}
-              alignSelf={"flex-start"}
+              // alignSelf={"flex-start"}
+              textAlign={"center"}
+              color={"gray"}
               variant="body1"
             >
               Members
