@@ -79,7 +79,7 @@ const NewGroup = () => {
           onChange={groupName.changeHandler}
         />
 
-        <Typography variant="body1">Members</Typography>
+        <Typography variant="body1" fontWeight={"bold"} borderBottom={"1px solid gray"} width={"23.5%"}>Members</Typography>
 
         <Stack>
           {isLoading ? (

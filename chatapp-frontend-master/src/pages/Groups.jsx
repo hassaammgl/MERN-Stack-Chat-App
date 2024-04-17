@@ -233,6 +233,7 @@ const Groups = () => {
 
   const ButtonGroup = (
     <Stack
+    borderTop={"1px solid gray"}
       direction={{
         xs: "column-reverse",
         sm: "row",
