@@ -12,12 +12,13 @@ import React, { Suspense, lazy, useState } from "react";
 import { orange } from "../../constants/color";
 // import study from "../../../public/studdybuddy.jpeg"
 import { IoMdPersonAdd } from "react-icons/io";
+import { MdGroups2 } from "react-icons/md";
 import study from "../../assets/buddystudy.png";
 import {
   Add as AddIcon,
   Menu as MenuIcon,
   // Search as SearchIcon,
-  Group as GroupIcon,
+  // Group as GroupIcon,
   Logout as LogoutIcon,
   Notifications as NotificationsIcon,
 } from "@mui/icons-material";
@@ -124,7 +125,8 @@ const Header = () => {
 
               <IconBtn
                 title={"Manage Groups"}
-                icon={<GroupIcon />}
+                // icon={<GroupIcon />}
+                icon={<MdGroups2 />}
                 onClick={navigateToGroup}
               />
 
