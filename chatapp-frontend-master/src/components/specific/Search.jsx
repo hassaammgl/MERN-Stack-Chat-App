@@ -58,6 +58,7 @@ const Search = () => {
         <TextField
           label=""
           value={search.value}
+          placeholder={"Search Users"}
           onChange={search.changeHandler}
           variant="outlined"
           size="small"
@@ -172,7 +173,6 @@ export default Search;
 //                 return e
 //               }
 //             }
-//               // e.name === user.name && e.username === user.username && e.email === user.email}
 //             )
 //             .map((i) => (
 //               <UserItem
@@ -191,13 +191,3 @@ export default Search;
 // };
 
 // export default Search;
-
-// /*
-//        {users.map((i) => (
-// -            <UserItem
-// -              key={i._id}
-// -              user={i}
-// -              addFriendHandler={addFriendHandler}
-// -              handlerIsLoading={isLoadingSendFriendRequest}
-// -            />)
-// -          ) */
