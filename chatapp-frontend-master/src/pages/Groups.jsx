@@ -233,7 +233,7 @@ const Groups = () => {
 
   const ButtonGroup = (
     <Stack
-    borderTop={"1px solid gray"}
+      borderTop={"1px solid gray"}
       direction={{
         xs: "column-reverse",
         sm: "row",
@@ -398,7 +398,17 @@ const GroupsList = ({ w = "100%", myGroups = [], chatId }) => (
         <GroupListItem group={group} chatId={chatId} key={group._id} />
       ))
     ) : (
-      <Typography textAlign={"center"} padding="1rem">
+      // <Typography fontSize={"1rem"}  display={"flex"} justifyContent={"center"} alignItems={"center"} textAlign={"center"}  padding="1rem">
+      //   No groups
+      // </Typography>
+      <Typography
+        fontSize="1rem"
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        textAlign="center"
+        sx={{ height: '100%' }} // Apply this style
+      >
         No groups
       </Typography>
     )}
