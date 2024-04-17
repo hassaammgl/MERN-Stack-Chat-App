@@ -20,6 +20,7 @@ import UserItem from "../shared/UserItem";
 
 const Search = () => {
   const { isSearch } = useSelector((state) => state.misc);
+  const { user } = useSelector((state) => state.auth);
 
   const [searchUser] = useLazySearchUserQuery();
 
@@ -63,22 +64,35 @@ const Search = () => {
           size="small"
           InputProps={{
             startAdornment: (
-              <InputAdornment  position="start">
-                <SearchIcon  />
+              <InputAdornment position="start">
+                <SearchIcon />
               </InputAdornment>
             ),
           }}
         />
 
         <List>
-          {users.map((i) => (
-            <UserItem
-              user={i}
-              key={i._id}
-              handler={addFriendHandler}
-              handlerIsLoading={isLoadingSendFriendRequest}
-            />
-          ))}
+          {users
+            .filter((e) => {
+              console.log("e", e);
+              console.log("user", user);
+              if (e._id === user._id) return null
+              else {
+                return e
+              }
+            }
+              // e.name === user.name && e.username === user.username && e.email === user.email}
+            )
+            .map((i) => (
+              <UserItem
+                key={i._id}
+                user={i}
+                addFriendHandler={addFriendHandler}
+                handlerIsLoading={isLoadingSendFriendRequest}
+              />
+            ))
+          }
+
         </List>
       </Stack>
     </Dialog>
@@ -86,3 +100,13 @@ const Search = () => {
 };
 
 export default Search;
+
+/*
+       {users.map((i) => (
+-            <UserItem
+-              key={i._id}
+-              user={i}
+-              addFriendHandler={addFriendHandler}
+-              handlerIsLoading={isLoadingSendFriendRequest}
+-            />)
+-          ) */
