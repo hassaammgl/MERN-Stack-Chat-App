@@ -407,6 +407,7 @@ const GroupsList = ({ w = "100%", myGroups = [], chatId }) => (
         justifyContent="center"
         alignItems="center"
         textAlign="center"
+        color={"gray"}
         sx={{ height: '100%' }} // Apply this style
       >
         No groups
