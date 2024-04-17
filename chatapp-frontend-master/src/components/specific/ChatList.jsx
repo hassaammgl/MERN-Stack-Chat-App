@@ -16,7 +16,7 @@ const ChatList = ({
   handleDeleteChat,
 }) => {
   return (
-    <Stack width={w} borderRadius={"2px"} direction={"column"} overflow={"auto"} height={"100%"}>
+    <Stack width={w} borderRadius={"0px"} direction={"column"} overflow={"auto"} height={"100%"}>
       {chats.length === 0 ? <Typography height={"100%"} display={"flex"} justifyContent={"center"} alignItems={"center"} textAlign={"center"} padding="1rem">No chats</Typography> : chats?.map((data, index) => {
         const { avatar, _id, name, groupChat, members } = data;
 
@@ -29,7 +29,12 @@ const ChatList = ({
         );
 
         return (
+          // <<<<<<<<<<<<<<  ✨ Codeium Command 🌟 >>>>>>>>>>>>>>>>
           <ChatItem
+            style={{
+              borderRadius: "2px",
+              backgroundColor: "#262626",
+            }}
             index={index}
             newMessageAlert={newMessageAlert}
             isOnline={isOnline}
