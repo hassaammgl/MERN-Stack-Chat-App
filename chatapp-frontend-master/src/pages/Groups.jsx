@@ -6,6 +6,7 @@ import {
   KeyboardBackspace as KeyboardBackspaceIcon,
   Menu as MenuIcon,
 } from "@mui/icons-material";
+import Header from "../components/layout/Header";
 import {
   Backdrop,
   Box,
@@ -163,6 +164,9 @@ const Groups = () => {
 
   const IconBtns = (
     <>
+      {/* <div>
+        <Header />
+      </div> */}
       <Box
         sx={{
           display: {

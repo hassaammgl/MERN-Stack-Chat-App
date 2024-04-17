@@ -269,7 +269,8 @@ const Chat = ({ chatId, user }) => {
               marginLeft: "1rem",
               padding: "0.5rem",
               "&:hover": {
-                bgcolor: "error.dark",
+                // bgcolor: "error.dark",
+                bgcolor: "black"
               },
             }}
           >
