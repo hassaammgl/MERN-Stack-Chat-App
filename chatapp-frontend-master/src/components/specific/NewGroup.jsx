@@ -69,8 +69,8 @@ const NewGroup = () => {
   return (
     <Dialog onClose={closeHandler} open={isNewGroup}>
       <Stack
-      //  p={{ xs: "1rem", sm: "3rem" }}
-      p={"0rem 2rem 3rem 2rem"}
+        //  p={{ xs: "1rem", sm: "3rem" }}
+        p={"0rem 2rem 3rem 2rem"}
         width={"25rem"} spacing={"3rem"}>
         <DialogTitle textAlign={"center"} variant="h4">
           New Group
@@ -82,7 +82,7 @@ const NewGroup = () => {
           onChange={groupName.changeHandler}
         />
 
-        <Typography variant="body1" fontWeight={"bold"} borderBottom={"1px solid gray"} width={"23.5%"}>Members</Typography>
+        <Typography variant="body1" fontWeight={"bold"} borderBottom={"1px solid gray"} width={"21%"}>Members</Typography>
 
         <Stack>
           {isLoading ? (
