@@ -191,7 +191,7 @@ const Chat = ({ chatId, user }) => {
       <Stack
         ref={containerRef}
         boxSizing={"border-box"}
-        marginLeft={"1rem"}  
+        marginLeft={"1rem"}
         padding={"1rem"}
         spacing={"1rem"}
         height={"90%"}
@@ -239,7 +239,7 @@ const Chat = ({ chatId, user }) => {
             sx={{
               position: "absolute",
               left: "-.5rem",
-          marginLeft:".4rem"
+              marginLeft: ".4rem"
             }}>
             <EmojiEmotionsOutlined />
           </IconButton>

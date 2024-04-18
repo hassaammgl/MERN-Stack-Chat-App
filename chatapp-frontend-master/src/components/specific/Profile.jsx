@@ -45,7 +45,7 @@ const Profile = ({ user }) => {
 
   return (
     <Stack spacing={"2rem"} direction={"column"} alignItems={"center"}>
-      {user?.avatar?.url === "" ? <Avatar
+      <Avatar
         src={transformImage(user?.avatar?.url)}
         alt={user?.name}
         sx={{
@@ -55,16 +55,7 @@ const Profile = ({ user }) => {
           marginBottom: "1rem",
           border: "5px solid white",
         }}
-      /> : <Avatar sx={{
-        width: 200,
-        height: 200,
-        fontSize: 90,
-        marginBottom: "1rem",
-        border: "5px solid white",
-        backgroundColor: stringToColor(user?.name),
-      }}>
-        {getInitials(user?.name)}
-      </Avatar>}
+      />
       <ProfileCard heading={"Bio"} text={user?.bio} />
       <ProfileCard
         heading={"Username"}

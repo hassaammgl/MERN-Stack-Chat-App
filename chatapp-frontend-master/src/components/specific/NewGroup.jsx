@@ -88,14 +88,15 @@ const NewGroup = () => {
           {isLoading ? (
             <Skeleton />
           ) : (
-            data?.friends?.map((i) => (
-              <UserItem
-                user={i}
-                key={i._id}
-                handler={selectMemberHandler}
-                isAdded={selectedMembers.includes(i._id)}
-              />
-            ))
+            data?.friends?.length < 1 ? <Typography color={"gray"} fontSize={"1rem"} textAlign={"center"}>No Friends Yet</Typography> :
+              data?.friends?.map((i) => (
+                <UserItem
+                  user={i}
+                  key={i._id}
+                  handler={selectMemberHandler}
+                  isAdded={selectedMembers.includes(i._id)}
+                />
+              ))
           )}
         </Stack>
 
