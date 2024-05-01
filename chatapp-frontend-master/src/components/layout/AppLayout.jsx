@@ -26,6 +26,7 @@ import Title from "../shared/Title";
 import ChatList from "../specific/ChatList";
 import Profile from "../specific/Profile";
 import Header from "./Header";
+import ChatRightMenu from "../specific/ChatRightMenu";
 
 const AppLayout = () => (WrappedComponent) => {
   return (props) => {
@@ -33,7 +34,7 @@ const AppLayout = () => (WrappedComponent) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const socket = getSocket();
- 
+
     const chatId = params.chatId;
     const deleteMenuAnchor = useRef(null);
 
@@ -140,19 +141,32 @@ const AppLayout = () => (WrappedComponent) => {
             <WrappedComponent {...props} chatId={chatId} user={user} />
           </Grid>
 
-          <Grid
+          {/* <Grid
             item
-            md={4}
-            lg={3}
-            height={"100%"}
+            // md={4}
+            // lg={3}
+            width={"5rem"}
+            // height={"100%"}
             sx={{
               display: { xs: "none", md: "block" },
               padding: "2rem",
               bgcolor: "rgba(0,0,0,0.85)",
             }}
           >
-            <Profile user={user} />
-          </Grid>
+            {/* <Profile user={user} /> 
+            <ChatRightMenu />
+          </Grid> 
+          */}
+              <Grid
+            item
+            sx={{
+              display: { xs: "none", md: "block" },
+              padding: "2rem",
+              bgcolor: "rgba(0,0,0,0.85)",
+            }}
+          >
+            <ChatRightMenu />
+          </Grid> 
         </Grid>
       </>
     );
