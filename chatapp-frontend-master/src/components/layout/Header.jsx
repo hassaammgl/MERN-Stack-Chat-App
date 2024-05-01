@@ -149,12 +149,8 @@ const Header = () => {
               <Drawer open={open} anchor="right" onClose={toggleDrawer(false)}>
                 <DL toggleDrawer={toggleDrawer} />
               </Drawer>
-              {/* <IconBtn
-                title={"Search"}
-                icon={<IoMdPersonAdd />}
-                onClick={openSearch}
-              />
-
+           
+ {/* 
               <IconBtn
                 title={"New Group"}
                 icon={<AddIcon />}

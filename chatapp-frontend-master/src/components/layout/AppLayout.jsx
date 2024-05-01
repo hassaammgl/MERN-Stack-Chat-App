@@ -128,16 +128,19 @@ const AppLayout = () => (WrappedComponent) => {
             {isLoading ? (
               <Skeleton />
             ) : (
-              <ChatList
-                chats={data?.chats}
-                chatId={chatId}
-                handleDeleteChat={handleDeleteChat}
-                newMessagesAlert={newMessagesAlert}
-                onlineUsers={onlineUsers}
-              />
+              <>
+                <ChatList
+                  chats={data?.chats}
+                  chatId={chatId}
+                  handleDeleteChat={handleDeleteChat}
+                  newMessagesAlert={newMessagesAlert}
+                  onlineUsers={onlineUsers}
+                />
+              </>
             )}
           </Grid>
-          <Grid item xs={12} sm={8} md={5} lg={6} height={"100%"}>
+          {/* <Grid item xs={12} sm={8} md={5} lg={6} height={"100%"}> */}
+          <Grid item height={"100%"} xs={8.4} sm={8.4} md={8.4} lg={8.4}>
             <WrappedComponent {...props} chatId={chatId} user={user} />
           </Grid>
 
@@ -155,18 +158,18 @@ const AppLayout = () => (WrappedComponent) => {
           >
             {/* <Profile user={user} /> 
             <ChatRightMenu />
-          </Grid> 
-          */}
-              <Grid
+          </Grid>  */}
+
+          <Grid
             item
+            md={0.6}
+            lg={0.6}
             sx={{
-              display: { xs: "none", md: "block" },
-              padding: "2rem",
               bgcolor: "rgba(0,0,0,0.85)",
             }}
           >
             <ChatRightMenu />
-          </Grid> 
+          </Grid>
         </Grid>
       </>
     );
