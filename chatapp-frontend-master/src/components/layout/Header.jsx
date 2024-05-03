@@ -13,9 +13,9 @@ import {
 import { DrawerList as DL } from "../shared/DrawerItems"
 import React, { Suspense, lazy, useState } from "react";
 import { orange } from "../../constants/color";
-// import study from "../../../public/studdybuddy.jpeg"
 import { IoIosChatbubbles, IoMdPersonAdd } from "react-icons/io";
 import { MdGroups2 } from "react-icons/md";
+import { Link } from 'react-router-dom'; // Import Link component for routing
 import { FaStore } from "react-icons/fa";
 import study from "../../assets/buddystudy.png";
 import {
@@ -79,7 +79,7 @@ const Header = () => {
   // const navigateToGroup = () => navigate("/groups");
 
   // const openProfile = () => {
-    // toggleDrawer(true)
+  // toggleDrawer(true)
   // }
 
 
@@ -106,14 +106,24 @@ const Header = () => {
           }}
         >
           <Toolbar>
-            <Typography
+            {/* <Typography
               variant="h6"
               sx={{
                 display: { xs: "none", sm: "block" },
               }}
             >
               <img src={study} alt="StuddyBuddy" style={{ width: '145px', height: '50px', marginTop: '5px' }} />
-            </Typography>
+            </Typography> */}
+
+            <Link to="/">  {/* Replace "/" with your actual homepage path if necessary */}
+              <Typography variant="h6" sx={{ display: { xs: "none", sm: "block" } }}>
+                <img
+                  src={study}
+                  alt="StuddyBuddy"
+                  style={{ width: "145px", height: "50px", marginTop: "5px" }}
+                />
+              </Typography>
+            </Link>
 
             <Box
               sx={{
@@ -149,8 +159,8 @@ const Header = () => {
               <Drawer open={open} anchor="right" onClose={toggleDrawer(false)}>
                 <DL toggleDrawer={toggleDrawer} />
               </Drawer>
-           
- {/* 
+
+              {/* 
               <IconBtn
                 title={"New Group"}
                 icon={<AddIcon />}
