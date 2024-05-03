@@ -115,7 +115,7 @@ const Header = () => {
               <img src={study} alt="StuddyBuddy" style={{ width: '145px', height: '50px', marginTop: '5px' }} />
             </Typography> */}
 
-            <Link to="/">  {/* Replace "/" with your actual homepage path if necessary */}
+            <Link to="/">
               <Typography variant="h6" sx={{ display: { xs: "none", sm: "block" } }}>
                 <img
                   src={study}
