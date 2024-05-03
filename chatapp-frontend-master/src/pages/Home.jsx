@@ -18,7 +18,7 @@ function Home() {
                     width:"100%",
                 }}
             >
-                Welcome to studdybuddy!
+                 Welcome to Study Buddy
             </Typography>
         </>
     )
