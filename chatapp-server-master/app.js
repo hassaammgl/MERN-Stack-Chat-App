@@ -25,6 +25,7 @@ import { socketAuthenticator } from "./middlewares/auth.js";
 import userRoute from "./routes/user.js";
 import chatRoute from "./routes/chat.js";
 import adminRoute from "./routes/admin.js";
+import postRoute from "./routes/post.js"
 
 dotenv.config({
   path: "./.env",

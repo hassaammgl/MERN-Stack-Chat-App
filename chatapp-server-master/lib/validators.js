@@ -76,6 +76,10 @@ const adminLoginValidator = () => [
   body("secretKey", "Please Enter Secret Key").notEmpty(),
 ];
 
+const PostValidator = () => {
+  
+}
+
 export {
   acceptRequestValidator,
   addMemberValidator,
@@ -89,4 +93,5 @@ export {
   sendAttachmentsValidator,
   sendRequestValidator,
   validateHandler,
+  PostValidator,
 };

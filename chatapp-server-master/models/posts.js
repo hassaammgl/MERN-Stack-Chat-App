@@ -14,6 +14,14 @@ const schema = new Schema(
         },
       },
     ],
+    title: {
+      type: String,
+      required: true,
+    },
+    description: {
+      type: String,
+      required: true,
+    },
 
     author: {
       type: Types.ObjectId,
@@ -26,4 +34,4 @@ const schema = new Schema(
   }
 );
 
-export const Message = mongoose.models.Posts || model("Posts", schema);
+export const Post = mongoose.models.Posts || model("Posts", schema);
