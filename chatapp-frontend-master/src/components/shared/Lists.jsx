@@ -189,7 +189,7 @@ const PostListItem = ({ post }) => {
         <>
             <div style={{ borderBottom: "1px solid black", padding: "2rem 0rem" }}>
                 <Box onClick={handlePostClick}>
-                    <Stack spacing={1} direction={"row"}>
+                    <Stack spacing={1} marginX={"5rem"} direction={"row"}>
                         <Box paddingRight={"3rem"}>
                             <img src={post.image} alt={post.title} width="450px" height="250px" />
                         </Box>
@@ -218,12 +218,12 @@ const PostListItem = ({ post }) => {
                 aria-describedby="modal-modal-description"
             >
                 <Stack spacing={1} sx={style}>
-                    <Stack direction="row" gap={"1rem"}>
+                    <Stack direction="row" alignItems={"center"} gap={"1rem"}>
                         <AccountCircleIcon sx={{ fontSize: "2rem" }} />
                         <Typography variant="body2" color={"text.secondary"}>{post.author.name}</Typography>
                     </Stack>
                     <Typography variant="h6" fontWeight={"bold"}>{post.title}</Typography>
-                    <img src={post.image} alt={post.title} width="700" height="200px" />
+                    <img src={post.image} alt={post.title} style={{ margin: "2rem 0" }} width="700" height="200px" />
                     <Box>
                         <Typography variant="body2" color={"text.secondary"}>
                             {post.description}
