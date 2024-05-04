@@ -219,7 +219,7 @@ const PostListItem = ({ post }) => {
             >
                 <Stack spacing={1} sx={style}>
                     <Stack direction="row" gap={"1rem"}>
-                        <AccountCircleIcon height={"80px"} width={"80px"} />
+                        <AccountCircleIcon  />
                         <Typography variant="body2" color={"text.secondary"}>{post.author.name}</Typography>
                     </Stack>
                     <Typography variant="h6" fontWeight={"bold"}>{post.title}</Typography>
