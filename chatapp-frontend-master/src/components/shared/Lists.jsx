@@ -1,13 +1,17 @@
 import React, { useEffect } from 'react'
-import { Box, Stack, Typography, Modal, Avatar } from '@mui/material'
+import { Box, Stack, Typography, Modal, Avatar, IconButton } from '@mui/material'
 import axios from 'axios';
 import { useState } from 'react';
 import ImageGallery from "react-image-gallery";
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import ChatIcon from '@mui/icons-material/Chat';
+import { filterProps } from 'framer-motion';
 
 const Lists = ({ category }) => {
     const [Posts, setPosts] = useState([]);
     const [filteredPosts, setFilteredPosts] = useState([]);
+
 
     const getPosts = async () => {
         try {
@@ -18,16 +22,26 @@ const Lists = ({ category }) => {
             console.error(error);
         }
     }
-
+    const filterPosts = (category) => {
+        const filteredData = Posts.filter((post) => 
+           {
+            if(post.category === category.toLowerCase){
+                return post
+            }
+            
+           } )
+        console.log(filteredData);
+    }
     useEffect(() => {
         getPosts();
-    }, []);
+    filterPosts(category);
+    }, [category]);
     return (
         <div style={{ height: "90vh", overflow: "hidden" }}>
             <Typography sx={{ textAlign: 'center', fontSize: '3rem', mt: '3rem' }} fontWeight={"bolder"}>{category} Posts</Typography>
             <Stack spacing={2} sx={{ mt: '2rem', marginX: '5rem', height: '100%', overflow: 'auto', "&::-webkit-scrollbar": { display: 'none' }, }} >
                 {
-                    Posts.length <= 0 ? <Typography sx={{ textAlign: 'center', fontSize: '3rem', mt: '3rem' }} fontWeight={"bolder"}>No Posts</Typography> : Posts.map((post) => <PostListItem key={post._id} post={post} />)
+                    filteredPosts?.length > 0 ? filteredPosts?.map((post) => <PostListItem post={post} key={post._id} />) : Posts.length <= 0 ? <Typography sx={{ textAlign: 'center', fontSize: '2.5rem', mt: '3rem' }} fontWeight={"bolder"}>No Posts</Typography> : Posts.map((post) => <PostListItem key={post._id} post={post} />)
                 }
             </Stack>
         </div>
@@ -46,6 +60,7 @@ const style = {
 };
 
 const PostListItem = ({ post }) => {
+    const { user } = useSelector((state) => state.auth);
 
     const [open, setOpen] = React.useState(false);
     const [imgs, setImgs] = React.useState([])
@@ -56,6 +71,16 @@ const PostListItem = ({ post }) => {
         }));
         setImgs(urls);
     }, [post.attachments]);
+    const navigate = useNavigate();
+    const handleChatClick = async () => {
+        await axios.post('http://localhost:3000/api/v1/post/directchat', {
+            name: `${post.author.name} ${user.name}`,
+            members: [post.author._id, user._id],
+        }).then(res => {
+            console.log(res.data.data);
+            navigate(`/chat/${res.data.data}`);
+        })
+    }
 
     const handlePostClick = () => {
         setOpen(open ? false : true);
@@ -96,7 +121,11 @@ const PostListItem = ({ post }) => {
                     <Stack direction="row" alignItems={"center"} gap={"1rem"}>
                         <Avatar src={post.author.avatar.url} />
                         <Typography variant="body2" fontWeight={"bold"} color={"text.secondary"}>{post.author.name}</Typography>
-                        <Stack position={"absolute"} top={"2.5rem"} right={"2.5rem"} ><ChatIcon /></Stack>
+                        <Stack position={"absolute"} top={"2.5rem"} right={"2.5rem"} >
+                            <IconButton onClick={handleChatClick}>
+                                <ChatIcon />
+                            </IconButton>
+                        </Stack>
                     </Stack>
 
                     <Typography variant="h6" fontWeight={"bold"}>{post.title}</Typography>

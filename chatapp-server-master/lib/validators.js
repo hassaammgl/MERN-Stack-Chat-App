@@ -1,5 +1,6 @@
 import { body, param, validationResult } from "express-validator";
 import { ErrorHandler } from "../utils/utility.js";
+import { Chat } from "../models/chat.js";
 
 const validateHandler = (req, res, next) => {
   const errors = validationResult(req);
@@ -77,7 +78,7 @@ const adminLoginValidator = () => [
 ];
 
 const PostValidator = (req, res, next) => {
-  const { title, description, image, user,category } = req.body;
+  const { title, description, image, user, category } = req.body;
   if (!title || !description || !user || !category) {
     return res.status(400).json({
       success: false,
@@ -90,12 +91,62 @@ const PostValidator = (req, res, next) => {
       message: "Max 5 images are allowed",
     })
   }
-  if (image.length <0) {
+  if (image.length < 0) {
     return res.status(400).json({
       success: false,
       message: "Please Enter Image",
     })
   }
+  next();
+}
+
+const BypassChatValidator = async (req, res, next) => {
+  console.log("BypassChatValidator");
+  const { name, members } = req.body;
+  if (!name || !members) {
+    return res.status(400).json({
+      success: false,
+      message: "Please Enter Name and Members",
+    });
+  }
+ 
+
+  if (members[0].toString() === members[1].toString()) {
+    return res.status(400).json({
+      success: false,
+      message: "You cannot add same user in a chat",
+    });
+  }
+  if (members.length < 2) {
+    return res.status(400).json({
+      success: false,
+      message: "Chat must have at least 2 members",
+    })
+  }
+  const allChats = await Chat.find({});
+
+  // <<<<<<<<<<<<<<  ✨ Codeium Command ⭐ >>>>>>>>>>>>>>>>
+  const chatsWithMembers = await Chat.find({
+    $and: [
+      { members: { $all: members.map(mem => mem._id) } },
+      { groupChat: false }
+    ]
+  });
+  const areInSameChat = chatsWithMembers.some(chat => chat.members.length > 1);
+  if (areInSameChat) {
+    return res.status(400).json({
+      success: false,
+      message: "Members already in a chat",
+      chatId: chatsWithMembers[0]._id
+    });
+  } else {
+    if (chatsWithMembers.length > 0) {
+      return next({ chatId: chatsWithMembers[0]._id });
+    } else {
+      return next();
+    }
+  }
+  // <<<<<<<  49835afd-c7fd-4516-8e0f-a9c896477cca  >>>>>>>
   next();
 }
 
@@ -113,4 +164,5 @@ export {
   sendRequestValidator,
   validateHandler,
   PostValidator,
+  BypassChatValidator,
 };

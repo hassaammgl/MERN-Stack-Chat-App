@@ -15,9 +15,9 @@ const Marketrightbar = ({ setter }) => {
     return (
         <Stack padding={"0.5rem"} >
             <Stack >
-                <IconBtn onClick={() => setter("Books")} title={"Books"} icon={<MenuBookIcon style={{ color: "white" }} />} />
-                <IconBtn onClick={() => setter("Tools")} title={"Tools"} icon={<HandymanIcon style={{ color: "white" }} />} />
-                <IconBtn onClick={() => setter("Summary/Notes")} title={"Summary/Notes"} icon={<ChecklistRtlIcon style={{ color: "white" }} />} />
+                <IconBtn onClick={() => setter("books")} title={"Books"} icon={<MenuBookIcon style={{ color: "white" }} />} />
+                <IconBtn onClick={() => setter("tools")} title={"Tools"} icon={<HandymanIcon style={{ color: "white" }} />} />
+                <IconBtn onClick={() => setter("summary")} title={"Summary/Notes"} icon={<ChecklistRtlIcon style={{ color: "white" }} />} />
             </Stack>
             <Stack position={"absolute"} right={16} bottom={5} >
                 <IconBtn onClick={handlePostClick} title={"Add Post"} icon={<AddIcon style={{ color: "white" }} />} />
