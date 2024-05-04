@@ -3,6 +3,7 @@ import { Box, Stack, Typography, Modal, Avatar } from '@mui/material'
 import axios from 'axios';
 import { useState } from 'react';
 import ImageGallery from "react-image-gallery";
+import ChatIcon from '@mui/icons-material/Chat';
 
 const Lists = ({ category }) => {
     const [Posts, setPosts] = useState([]);
@@ -95,7 +96,9 @@ const PostListItem = ({ post }) => {
                     <Stack direction="row" alignItems={"center"} gap={"1rem"}>
                         <Avatar src={post.author.avatar.url} />
                         <Typography variant="body2" fontWeight={"bold"} color={"text.secondary"}>{post.author.name}</Typography>
+                        <Stack position={"absolute"} top={"2.5rem"} right={"2.5rem"} ><ChatIcon /></Stack>
                     </Stack>
+
                     <Typography variant="h6" fontWeight={"bold"}>{post.title}</Typography>
                     {/* <img src={post.image} alt={post.title} style={{ margin: "2rem 0" }} width="700" height="200px" /> */}
                     <Box style={{ margin: "2rem 0", width: '100%', height: '30rem', overflow: 'auto' }}>
