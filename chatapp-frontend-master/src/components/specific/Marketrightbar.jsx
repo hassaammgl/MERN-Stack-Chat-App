@@ -1,13 +1,14 @@
 import React from 'react'
-import { Grid, Stack, Box, IconButton, Tooltip, Badge } from '@mui/material'
+import { Stack, IconButton, Tooltip, Badge } from '@mui/material'
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import HandymanIcon from '@mui/icons-material/Handyman';
 import ChecklistRtlIcon from '@mui/icons-material/ChecklistRtl';
 import AddIcon from '@mui/icons-material/Add';
-import { Typography, Modal } from '@mui/material'
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import AddPosts from '../dialogs/AddPosts';
+
 
 const Marketrightbar = ({ setter }) => {
+    const [open, setOpen] = React.useState(false);
     const handlePostClick = () => {
         setOpen(open ? false : true);
     }
@@ -19,8 +20,9 @@ const Marketrightbar = ({ setter }) => {
                 <IconBtn onClick={() => setter("Summary/Notes")} title={"Summary/Notes"} icon={<ChecklistRtlIcon style={{ color: "white" }} />} />
             </Stack>
             <Stack position={"absolute"} right={16} bottom={5} >
-                <IconBtn title={"Add Post"} icon={<AddIcon style={{ color: "white" }} />} />
+                <IconBtn onClick={handlePostClick} title={"Add Post"} icon={<AddIcon style={{ color: "white" }} />} />
             </Stack>
+            <AddPosts open={open} handlePostClick={handlePostClick} />
         </Stack>
     )
 }

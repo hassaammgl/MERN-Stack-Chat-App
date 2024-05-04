@@ -55,13 +55,17 @@ const io = new Server(server, {
 app.set("io", io);
 
 // Using Middlewares Here
+
+app.use(express.json({ limit: '15mb' }));
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors(corsOptions));
 
+
 app.use("/api/v1/user", userRoute);
 app.use("/api/v1/chat", chatRoute);
 app.use("/api/v1/admin", adminRoute);
+app.use("/api/v1/post", postRoute);
 
 app.get("/", (req, res) => {
   res.send("Hello World");

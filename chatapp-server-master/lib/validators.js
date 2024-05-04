@@ -76,8 +76,27 @@ const adminLoginValidator = () => [
   body("secretKey", "Please Enter Secret Key").notEmpty(),
 ];
 
-const PostValidator = () => {
-  
+const PostValidator = (req, res, next) => {
+  const { title, description, image, user,category } = req.body;
+  if (!title || !description || !user || !category) {
+    return res.status(400).json({
+      success: false,
+      message: "Please Enter Title, Description and User",
+    });
+  }
+  if (image.length > 5) {
+    return res.status(400).json({
+      success: false,
+      message: "Max 5 images are allowed",
+    })
+  }
+  if (image.length <0) {
+    return res.status(400).json({
+      success: false,
+      message: "Please Enter Image",
+    })
+  }
+  next();
 }
 
 export {

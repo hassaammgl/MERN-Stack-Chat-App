@@ -1,42 +1,45 @@
 import { TryCatch } from "../middlewares/error.js";
-import { ErrorHandler } from "../utils/utility.js";
-
 import { Post } from "../models/posts.js";
+import { User } from "../models/user.js";
 import {
-    uploadFilesToCloudinary,
+    uploadFilesToCloudinary2,
 } from "../utils/features.js";
 
-import { User } from "../models/user.js";
 
-const createPost = TryCatch(async (req, res, next) => {
-    const { name, members } = req.body;
+const createPost = TryCatch(async (req, res) => {
+    const { title, description, image, user, category } = req.body;
+    const attachments = await uploadFilesToCloudinary2(image);
+    console.log(attachments);
+    const Myuser = await User.findById(user);
+    const post = await Post.create({
+        title,
+        description,
+        attachments: [...attachments],
+        author: Myuser._id,
+        category: category,
+    });
+    console.log(post);
+    await post.save();
+
     return res.status(201).json({
         success: true,
-        message: "Group Created",
+        message: "Post Created Successfully",
+    });
+});
+
+
+const getAllPosts = TryCatch(async (req, res) => {
+    const posts = await Post.find().populate("author", "name avatar _id");
+
+    return res.status(200).json({
+        success: true,
+        data: posts,
     });
 });
 
 
 
-// const sendAttachments = TryCatch(async (req, res, next) => {
-
-//     const files = req.files || [];
-
-//     if (files.length < 1)
-//         return next(new ErrorHandler("Please Upload Attachments", 400));
-
-//     if (files.length > 5)
-//         return next(new ErrorHandler("Files Can't be more than 5", 400));
-
-
-//     if (files.length < 1)
-//         return next(new ErrorHandler("Please provide attachments", 400));
-
-//     //   Upload files here
-//     const attachments = await uploadFilesToCloudinary(files);
-// });
-
-
 export {
     createPost,
+    getAllPosts
 };

@@ -30,7 +30,7 @@ const schema = new Schema(
     },
     category: {
       type: String,
-      enum: ["notes/summary", "books", "tools"],
+      enum: ["notes", "summary", "books", "tools"],
     },
   },
   {
