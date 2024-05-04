@@ -187,9 +187,9 @@ const PostListItem = ({ post }) => {
 
     return (
         <>
-            <div style={{ borderBottom: "1px solid black", padding: "2rem 0rem" }}>
+            <div >
                 <Box onClick={handlePostClick}>
-                    <Stack spacing={1} marginX={"5rem"} direction={"row"}>
+                    <Stack style={{  padding: "2rem 1rem", boxShadow:"rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px" }}   spacing={1} marginX={"6.5rem"} direction={"row"}>
                         <Box paddingRight={"3rem"}>
                             <img src={post.image} alt={post.title} width="450px" height="250px" />
                         </Box>
@@ -208,6 +208,7 @@ const PostListItem = ({ post }) => {
                                 Posted at: 4 May 2024
                             </Typography>
                         </Box>
+                        <hr />
                     </Stack>
                 </Box>
             </div>
