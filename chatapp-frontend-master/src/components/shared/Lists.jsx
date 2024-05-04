@@ -198,8 +198,8 @@ const PostListItem = ({ post }) => {
                             <Typography variant="body2" color={"text.secondary"} marginBottom={"1.5rem"}>
                                 {post.description.length > 300 ? `${post.description.substring(0, 300)}...` : post.description}
                             </Typography>
-                            <Stack direction="row" gap={"1rem"} marginBottom={"0.5rem"}>
-                                <AccountCircleIcon height={"80px"} width={"80px"} />
+                            <Stack direction="row" gap={"1rem"} alignItems={"center"} marginBottom={"0.5rem"}>
+                                <AccountCircleIcon sx={{ fontSize: "2rem" }} />
                                 {/* <img src={post.author.avatar} /> */}
                                 <Typography variant="body2" fontWeight={"bold"} color={"text.secondary"}>{post.author.name}</Typography>
                             </Stack>
@@ -219,7 +219,7 @@ const PostListItem = ({ post }) => {
             >
                 <Stack spacing={1} sx={style}>
                     <Stack direction="row" gap={"1rem"}>
-                        <AccountCircleIcon  />
+                        <AccountCircleIcon sx={{ fontSize: "2rem" }} />
                         <Typography variant="body2" color={"text.secondary"}>{post.author.name}</Typography>
                     </Stack>
                     <Typography variant="h6" fontWeight={"bold"}>{post.title}</Typography>
