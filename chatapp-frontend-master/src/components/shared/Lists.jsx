@@ -195,12 +195,12 @@ const PostListItem = ({ post }) => {
                             <img src={post.image} alt={post.title} width="450px" height="250px" />
                         </Box>
                         <Box>
-                            <Typography variant="h6" fontWeight={"bold"} marginBottom={"1.5rem"}>{post.title}</Typography>
+                            <Typography variant="h6" fontWeight={"bold"} color={"gray"}  marginBottom={"1.5rem"}>{post.title}</Typography>
                             <Typography variant="body2" color={"text.secondary"} marginBottom={"1.5rem"}>
                                 {post.description.length > 300 ? `${post.description.substring(0, 300)}...` : post.description}
                             </Typography>
                             <Stack direction="row" gap={"1rem"} marginBottom={"0.5rem"}>
-                                <RxAvatar height={"40px"} width={"40px"} />
+                                <RxAvatar height={"80px"} width={"80px"} />
                                 {/* <img src={post.author.avatar} /> */}
                                 <Typography variant="body2" fontWeight={"bold"}  color={"text.secondary"}>{post.author.name}</Typography>
                             </Stack>
