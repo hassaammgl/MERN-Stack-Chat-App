@@ -1,7 +1,6 @@
 import React from 'react'
 import { Box, Stack, Typography, Modal } from '@mui/material'
-import { RxAvatar } from "react-icons/rx";
-
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 const Posts = [
     {
         title: 'Post 1',
@@ -200,13 +199,13 @@ const PostListItem = ({ post }) => {
                                 {post.description.length > 300 ? `${post.description.substring(0, 300)}...` : post.description}
                             </Typography>
                             <Stack direction="row" gap={"1rem"} marginBottom={"0.5rem"}>
-                                <RxAvatar height={"80px"} width={"80px"} />
+                                <AccountCircleIcon height={"80px"} width={"80px"} />
                                 {/* <img src={post.author.avatar} /> */}
                                 <Typography variant="body2" fontWeight={"bold"} color={"text.secondary"}>{post.author.name}</Typography>
                             </Stack>
                             <Typography>
                                 {/* Created At: {new Date(post.createdAt).toLocaleString()}  */}
-                                Created at: 4 May 2024
+                                Posted at: 4 May 2024
                             </Typography>
                         </Box>
                     </Stack>
@@ -219,12 +218,12 @@ const PostListItem = ({ post }) => {
                 aria-describedby="modal-modal-description"
             >
                 <Stack spacing={1} sx={style}>
-                    <Stack direction="row">
-                        <RxAvatar height={"80px"} width={"80px"} />
+                    <Stack direction="row" gap={"1rem"}>
+                        <AccountCircleIcon height={"80px"} width={"80px"} />
                         <Typography variant="body2" color={"text.secondary"}>{post.author.name}</Typography>
                     </Stack>
                     <Typography variant="h6" fontWeight={"bold"}>{post.title}</Typography>
-                    <img src={post.image} alt={post.title} width="300" height="200px" />
+                    <img src={post.image} alt={post.title} width="700" height="200px" />
                     <Box>
                         <Typography variant="body2" color={"text.secondary"}>
                             {post.description}
