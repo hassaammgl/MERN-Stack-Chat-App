@@ -198,10 +198,7 @@ const PostListItem = ({ post }) => {
                             {post.description.length > 300 ? `${post.description.substring(0, 300)}...` : post.description}
                         </Typography>
                     </Box>
-                    {/* <Stack direction="row" spacing={1}>
-                    <img src={post.author.avatar}  />
-                    <Typography variant="body2" color={"text.secondary"}>{post.author.name}</Typography>
-                </Stack> */}
+
                 </Stack>
             </Box>
 
