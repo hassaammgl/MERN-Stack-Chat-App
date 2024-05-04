@@ -188,20 +188,22 @@ const PostListItem = ({ post }) => {
 
     return (
         <>
-            <Box onClick={handlePostClick}>
-                <Stack spacing={1} direction={"row"}>
-                    <img src={post.image} alt={post.title} width="300" height="200" />
-                    <Box>
+            <div style={{borderBottom:"1px solid black",paddingBottom:"1rem"}}>
+                <Box>
+                    <Box onClick={handlePostClick}>
+                        <Stack spacing={1} direction={"row"}>
+                            <img src={post.image} alt={post.title} width="300px" height="250px" />
+                            <Box>
 
-                        <Typography variant="h6" fontWeight={"bold"}>{post.title}</Typography>
-                        <Typography variant="body2" color={"text.secondary"}>
-                            {post.description.length > 300 ? `${post.description.substring(0, 300)}...` : post.description}
-                        </Typography>
+                                <Typography variant="h6" fontWeight={"bold"}>{post.title}</Typography>
+                                <Typography variant="body2" color={"text.secondary"}>
+                                    {post.description.length > 300 ? `${post.description.substring(0, 300)}...` : post.description}
+                                </Typography>
+                            </Box>
+                        </Stack>
                     </Box>
-
-                </Stack>
-            </Box>
-
+                </Box>
+            </div>
             <Modal
                 open={open}
                 onClose={handlePostClick}
@@ -209,7 +211,7 @@ const PostListItem = ({ post }) => {
                 aria-describedby="modal-modal-description"
             >
                 <Stack spacing={1} direction={"row"} sx={style}>
-                    <img src={post.image} alt={post.title} width="300" height="200" />
+                    <img src={post.image} alt={post.title} width="300" height="200px" />
                     <Box>
 
                         <Typography variant="h6" fontWeight={"bold"}>{post.title}</Typography>
@@ -217,7 +219,7 @@ const PostListItem = ({ post }) => {
                             {post.description}
                         </Typography>
                     </Box>
-                    <Stack direction="row" spacing={1}>
+                    <Stack direction="row">
                         <img src={post.author.avatar} />
                         <Typography variant="body2" color={"text.secondary"}>{post.author.name}</Typography>
                     </Stack>
