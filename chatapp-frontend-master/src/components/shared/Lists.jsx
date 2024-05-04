@@ -15,8 +15,8 @@ const Posts = [
     },
     {
         title: 'Post 2',
-        description: 'This is post 2 description. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-        image: "https://picsum.photos/200/301",
+        description: 'This is post 2 description. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Ut enim ad minim veniam, quis  ',
+        image: "https://imgs.search.brave.com/iDw7aVRV00p0wmn0B_Dq0mZhD1FKz5YT1gyO2GkLYl8/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMTgy/NDY1MDk3L3Bob3Rv/L2h0bWwtY29kZS5q/cGc_cz02MTJ4NjEy/Jnc9MCZrPTIwJmM9/cUlIWldfc3JaTkZI/RzVjamVrbGkwLU9T/UzRZbjlWSWNtcFl5/V19jS3B3MD0",
         author: {
             name: 'Jane Smith',
             avatar: "https://www.w3schools.com/howto/img_avatar2.png",
@@ -189,10 +189,11 @@ const PostListItem = ({ post }) => {
     return (
         <>
             <div style={{borderBottom:"1px solid black",paddingBottom:"1rem"}}>
-                <Box>
                     <Box onClick={handlePostClick}>
                         <Stack spacing={1} direction={"row"}>
-                            <img src={post.image} alt={post.title} width="300px" height="250px" />
+                            <Box paddingRight={"3rem"}>
+                            <img src={post.image} alt={post.title}  width="300px" height="250px" />
+                            </Box>
                             <Box>
 
                                 <Typography variant="h6" fontWeight={"bold"}>{post.title}</Typography>
@@ -202,7 +203,6 @@ const PostListItem = ({ post }) => {
                             </Box>
                         </Stack>
                     </Box>
-                </Box>
             </div>
             <Modal
                 open={open}
