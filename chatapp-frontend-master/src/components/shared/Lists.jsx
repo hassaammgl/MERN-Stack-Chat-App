@@ -188,7 +188,7 @@ const PostListItem = ({ post }) => {
 
     return (
         <>
-            <div style={{ borderBottom: "1px solid black", padding: "1.5rem 0rem" }}>
+            <div style={{ borderBottom: "1px solid black", padding: "2rem 0rem" }}>
                 <Box onClick={handlePostClick}>
                     <Stack spacing={1} direction={"row"}>
                         <Box paddingRight={"3rem"}>
