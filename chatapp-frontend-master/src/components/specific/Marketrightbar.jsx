@@ -4,8 +4,13 @@ import MenuBookIcon from '@mui/icons-material/MenuBook';
 import HandymanIcon from '@mui/icons-material/Handyman';
 import ChecklistRtlIcon from '@mui/icons-material/ChecklistRtl';
 import AddIcon from '@mui/icons-material/Add';
+import { Typography, Modal } from '@mui/material'
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const Marketrightbar = ({ setter }) => {
+    const handlePostClick = () => {
+        setOpen(open ? false : true);
+    }
     return (
         <Stack padding={"0.5rem"} >
             <Stack >
@@ -13,8 +18,8 @@ const Marketrightbar = ({ setter }) => {
                 <IconBtn onClick={() => setter("Tools")} title={"Tools"} icon={<HandymanIcon style={{ color: "white" }} />} />
                 <IconBtn onClick={() => setter("Summary/Notes")} title={"Summary/Notes"} icon={<ChecklistRtlIcon style={{ color: "white" }} />} />
             </Stack>
-            <Stack position={"absolute"} right={16} bottom={5}>
-                <IconBtn  title={"Add Post"} icon={<AddIcon style={{ color: "white" }} />} />
+            <Stack position={"absolute"} right={16} bottom={5} >
+                <IconBtn title={"Add Post"} icon={<AddIcon style={{ color: "white" }} />} />
             </Stack>
         </Stack>
     )
