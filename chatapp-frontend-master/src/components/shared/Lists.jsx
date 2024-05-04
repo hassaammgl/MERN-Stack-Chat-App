@@ -195,14 +195,14 @@ const PostListItem = ({ post }) => {
                             <img src={post.image} alt={post.title} width="450px" height="250px" />
                         </Box>
                         <Box>
-                            <Typography variant="h6" fontWeight={"bold"} color={"gray"}  marginBottom={"1.5rem"}>{post.title}</Typography>
+                            <Typography variant="h6" fontWeight={"bold"} color={"gray"} marginBottom={"1.5rem"}>{post.title}</Typography>
                             <Typography variant="body2" color={"text.secondary"} marginBottom={"1.5rem"}>
                                 {post.description.length > 300 ? `${post.description.substring(0, 300)}...` : post.description}
                             </Typography>
                             <Stack direction="row" gap={"1rem"} marginBottom={"0.5rem"}>
                                 <RxAvatar height={"80px"} width={"80px"} />
                                 {/* <img src={post.author.avatar} /> */}
-                                <Typography variant="body2" fontWeight={"bold"}  color={"text.secondary"}>{post.author.name}</Typography>
+                                <Typography variant="body2" fontWeight={"bold"} color={"text.secondary"}>{post.author.name}</Typography>
                             </Stack>
                             <Typography>
                                 {/* Created At: {new Date(post.createdAt).toLocaleString()}  */}
@@ -218,7 +218,11 @@ const PostListItem = ({ post }) => {
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
-                <Stack spacing={1} direction={"row"} sx={style}>
+                <Stack spacing={1} sx={style}>
+                    <Stack direction="row">
+                        <RxAvatar height={"80px"} width={"80px"} />
+                        <Typography variant="body2" color={"text.secondary"}>{post.author.name}</Typography>
+                    </Stack>
                     <img src={post.image} alt={post.title} width="300" height="200px" />
                     <Box>
 
@@ -227,10 +231,6 @@ const PostListItem = ({ post }) => {
                             {post.description}
                         </Typography>
                     </Box>
-                    <Stack direction="row">
-                        <img src={post.author.avatar} />
-                        <Typography variant="body2" color={"text.secondary"}>{post.author.name}</Typography>
-                    </Stack>
                 </Stack>
             </Modal>
         </>
