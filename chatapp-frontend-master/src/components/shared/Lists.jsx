@@ -223,7 +223,7 @@ const PostListItem = ({ post }) => {
                         <RxAvatar height={"80px"} width={"80px"} />
                         <Typography variant="body2" color={"text.secondary"}>{post.author.name}</Typography>
                     </Stack>
-                        <Typography variant="h6" fontWeight={"bold"}>{post.title}</Typography>
+                    <Typography variant="h6" fontWeight={"bold"}>{post.title}</Typography>
                     <img src={post.image} alt={post.title} width="300" height="200px" />
                     <Box>
                         <Typography variant="body2" color={"text.secondary"}>
