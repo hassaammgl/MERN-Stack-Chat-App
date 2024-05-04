@@ -1,6 +1,6 @@
 import React from 'react'
 import { Box, Stack, Typography, Modal } from '@mui/material'
-
+import { RxAvatar } from "react-icons/rx";
 
 const Posts = [
     {
@@ -188,21 +188,29 @@ const PostListItem = ({ post }) => {
 
     return (
         <>
-            <div style={{borderBottom:"1px solid black",paddingBottom:"1rem"}}>
-                    <Box onClick={handlePostClick}>
-                        <Stack spacing={1} direction={"row"}>
-                            <Box paddingRight={"3rem"}>
-                            <img src={post.image} alt={post.title}  width="300px" height="250px" />
-                            </Box>
-                            <Box>
-
-                                <Typography variant="h6" fontWeight={"bold"}>{post.title}</Typography>
-                                <Typography variant="body2" color={"text.secondary"}>
-                                    {post.description.length > 300 ? `${post.description.substring(0, 300)}...` : post.description}
-                                </Typography>
-                            </Box>
-                        </Stack>
-                    </Box>
+            <div style={{ borderBottom: "1px solid black", padding: "1.5rem 0rem" }}>
+                <Box onClick={handlePostClick}>
+                    <Stack spacing={1} direction={"row"}>
+                        <Box paddingRight={"3rem"}>
+                            <img src={post.image} alt={post.title} width="450px" height="250px" />
+                        </Box>
+                        <Box>
+                            <Typography variant="h6" fontWeight={"bold"} marginBottom={"1.5rem"}>{post.title}</Typography>
+                            <Typography variant="body2" color={"text.secondary"} marginBottom={"1.5rem"}>
+                                {post.description.length > 300 ? `${post.description.substring(0, 300)}...` : post.description}
+                            </Typography>
+                            <Stack direction="row" gap={"1rem"} marginBottom={"0.5rem"}>
+                                <RxAvatar height={"40px"} width={"40px"} />
+                                {/* <img src={post.author.avatar} /> */}
+                                <Typography variant="body2" fontWeight={"bold"}  color={"text.secondary"}>{post.author.name}</Typography>
+                            </Stack>
+                            <Typography>
+                                {/* Created At: {new Date(post.createdAt).toLocaleString()}  */}
+                                Created at: 4 May 2024
+                            </Typography>
+                        </Box>
+                    </Stack>
+                </Box>
             </div>
             <Modal
                 open={open}
