@@ -14,7 +14,7 @@ const Marketrightbar = ({ setter }) => {
                 <IconBtn onClick={() => setter("Summary/Notes")} title={"Summary/Notes"} icon={<ChecklistRtlIcon style={{ color: "white" }} />} />
             </Stack>
             <Stack position={"absolute"} right={16} bottom={5}>
-                <IconBtn title={"Add Post"} icon={<AddIcon style={{ color: "white" }} />} />
+                <IconBtn  title={"Add Post"} icon={<AddIcon style={{ color: "white" }} />} />
             </Stack>
         </Stack>
     )

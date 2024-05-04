@@ -28,6 +28,10 @@ const schema = new Schema(
       ref: "User",
       required: true,
     },
+    category: {
+      type: String,
+      enum: ["notes/summary", "books", "tools"],
+    },
   },
   {
     timestamps: true,
