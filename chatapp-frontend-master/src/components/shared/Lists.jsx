@@ -187,11 +187,12 @@ const PostListItem = ({ post }) => {
 
     return (
         <>
+
             <div >
                 <Box onClick={handlePostClick}>
-                    <Stack style={{  padding: "2rem 1rem", boxShadow:"rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px" }}   spacing={1} marginX={"6.5rem"} direction={"row"}>
+                    <Stack style={{ padding: "2rem 1rem", boxShadow: "rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px" }} spacing={1} marginX={"6.5rem"} direction={"row"}>
                         <Box paddingRight={"3rem"}>
-                            <img src={post.image} alt={post.title} width="450px" height="250px" />
+                            <img src={post.image} alt={post.title} style={{ borderRadius: "5px" }} width="450px" height="250px" />
                         </Box>
                         <Box>
                             <Typography variant="h6" fontWeight={"bold"} color={"gray"} marginBottom={"1.5rem"}>{post.title}</Typography>
@@ -208,7 +209,7 @@ const PostListItem = ({ post }) => {
                                 Posted at: 4 May 2024
                             </Typography>
                         </Box>
-                        <hr />
+                        <br />
                     </Stack>
                 </Box>
             </div>
