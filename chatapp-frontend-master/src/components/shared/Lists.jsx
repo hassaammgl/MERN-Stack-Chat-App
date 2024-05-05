@@ -123,7 +123,7 @@ const PostListItem = ({ post }) => {
                         <Typography variant="body2" fontWeight={"bold"} color={"text.secondary"}>{post.author.name}</Typography>
                         <Stack position={"absolute"} top={"2.5rem"} right={"2.5rem"} >
                             <IconButton onClick={handleChatClick}>
-                             {(post.author._id !== user._id) && <ChatIcon />}
+                                {(post.author._id !== user._id) && <ChatIcon />}
                             </IconButton>
                         </Stack>
                     </Stack>
