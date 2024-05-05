@@ -117,7 +117,7 @@ const PostListItem = ({ post }) => {
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
-                <Stack spacing={1} sx={style} style={{ height: "38rem" }}>
+                <Stack spacing={1} sx={style} style={{ height: "85%" }}>
                     <Stack direction="row" alignItems={"center"} gap={"1rem"}>
                         <Avatar src={post.author.avatar.url} />
                         <Typography variant="body2" fontWeight={"bold"} color={"text.secondary"}>{post.author.name}</Typography>
