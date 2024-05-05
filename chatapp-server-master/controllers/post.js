@@ -28,8 +28,17 @@ const createPost = TryCatch(async (req, res) => {
 });
 
 
-const getAllPosts = TryCatch(async (req, res) => {
-    const posts = await Post.find().populate("author", "name avatar _id");
+
+
+const getPostOnCategory = TryCatch(async (req, res) => {
+    console.log("category", req.params.category);
+    let posts;
+    if (req.params.category === "all") {
+        posts = await Post.find().populate("author", "name avatar _id");
+    }
+    else {
+        posts = await Post.find({ category: req.params.category }).populate("author", "name avatar _id");
+    }
 
     return res.status(200).json({
         success: true,
@@ -40,6 +49,6 @@ const getAllPosts = TryCatch(async (req, res) => {
 
 
 export {
+    getPostOnCategory,
     createPost,
-    getAllPosts
 };

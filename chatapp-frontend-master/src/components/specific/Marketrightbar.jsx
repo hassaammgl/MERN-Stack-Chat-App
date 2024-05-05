@@ -7,7 +7,7 @@ import AddIcon from '@mui/icons-material/Add';
 import AddPosts from '../dialogs/AddPosts';
 
 
-const Marketrightbar = ({ setter }) => {
+const Marketrightbar = ({ setter,change }) => {
     const [open, setOpen] = React.useState(false);
     const handlePostClick = () => {
         setOpen(open ? false : true);
@@ -15,14 +15,14 @@ const Marketrightbar = ({ setter }) => {
     return (
         <Stack padding={"0.5rem"} >
             <Stack>
-                <IconBtn onClick={() => setter("books")} title={"Books"} icon={<MenuBookIcon style={{ color: "white" }} />} />
-                <IconBtn onClick={() => setter("tools")} title={"Tools"} icon={<HandymanIcon style={{ color: "white" }} />} />
-                <IconBtn onClick={() => setter("summary")} title={"Summary/Notes"} icon={<ChecklistRtlIcon style={{ color: "white" }} />} />
+                <IconBtn onClick={() => setter("Books")} title={"Books"} icon={<MenuBookIcon style={{ color: "white" }} />} />
+                <IconBtn onClick={() => setter("Tools")} title={"Tools"} icon={<HandymanIcon style={{ color: "white" }} />} />
+                <IconBtn onClick={() => setter("Summary")} title={"Summary/Notes"} icon={<ChecklistRtlIcon style={{ color: "white" }} />} />
             </Stack>
             <Stack position={"absolute"} right={16} bottom={5} >
                 <IconBtn onClick={handlePostClick} bottom={true} title={"Add Post"} icon={<AddIcon style={{ color: "white" }} />} />
             </Stack>
-            <AddPosts open={open} setOpen={setOpen} handlePostClick={handlePostClick} />
+            <AddPosts open={open} change={change} setOpen={setOpen} handlePostClick={handlePostClick} />
         </Stack>
     )
 }

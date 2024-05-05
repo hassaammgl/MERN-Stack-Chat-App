@@ -6,7 +6,7 @@ import { useSelector } from "react-redux"
 import toast from "react-hot-toast";
 
 
-const AddPosts = ({ open, handlePostClick, setOpen }) => {
+const AddPosts = ({ open, handlePostClick, setOpen, change }) => {
     const { user } = useSelector((state) => state.auth);
 
     const [values, setValues] = React.useState({
@@ -33,6 +33,7 @@ const AddPosts = ({ open, handlePostClick, setOpen }) => {
             toast.success(res.data.message)
             console.log("res", res);
             setOpen(false);
+            change.setChange(!change.change);
         }
 
     }

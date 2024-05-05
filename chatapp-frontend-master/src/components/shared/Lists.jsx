@@ -5,43 +5,36 @@ import { useState } from 'react';
 import ImageGallery from "react-image-gallery";
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 import ChatIcon from '@mui/icons-material/Chat';
-import { filterProps } from 'framer-motion';
 
-const Lists = ({ category }) => {
+const Lists = ({ category, change }) => {
     const [Posts, setPosts] = useState([]);
-    const [filteredPosts, setFilteredPosts] = useState([]);
 
 
     const getPosts = async () => {
         try {
-            const response = await axios.get('http://localhost:3000/api/v1/post/getall');
+            let myCatagory = category.toLowerCase();
+            toast.loading("Getting Posts...");
+            const response = await axios.get(`http://localhost:3000/api/v1/post/getpost/${myCatagory}`);
             setPosts(response.data.data);
+            toast.dismiss();
+            toast.success("Posts found successfully...");
             console.log(response.data.data);
         } catch (error) {
             console.error(error);
         }
     }
-    const filterPosts = (category) => {
-        const filteredData = Posts.filter((post) => {
-            if (post.category === category.toLowerCase) {
-                return post
-            }
 
-        })
-        // console.log("hassaam",filteredData);
-        console.log(filteredData);
-    }
     useEffect(() => {
         getPosts();
-        filterPosts(category);
-    }, [category]);
+    }, [category, change.change]);
     return (
         <div style={{ height: "90vh", overflow: "hidden" }}>
-            <Typography sx={{ textAlign: 'center', fontSize: '3rem', mt: '3rem' }} fontWeight={"bolder"}>{category} Posts</Typography>
-            <Stack spacing={2} sx={{ mt: '2rem', marginX: '5rem', height: '100%', overflow: 'auto', "&::-webkit-scrollbar": { display: 'none' }, }} >
+            <Typography sx={{ textAlign: 'center', fontSize: '3rem', mt: '2.5rem' }} fontWeight={"bolder"}>{category === "Summary" ? "Summary/Notes" : category} Posts</Typography>
+            <Stack sx={{ mb: '3rem', marginX: '5rem', height: '100%', overflow: 'auto', "&::-webkit-scrollbar": { display: 'none' }, }} >
                 {
-                    filteredPosts?.length > 0 ? filteredPosts?.map((post) => <PostListItem post={post} key={post._id} />) : Posts.length <= 0 ? <Typography sx={{ textAlign: 'center', fontSize: '2.5rem', mt: '3rem' }} fontWeight={"bolder"}>No Posts</Typography> : Posts.map((post) => <PostListItem key={post._id} post={post} />)
+                    Posts.length <= 0 ? <Typography sx={{ textAlign: 'center', fontSize: '2.5rem', mt: '3rem' }} fontWeight={"bolder"}>No Posts</Typography> : Posts.map((post) => <PostListItem key={post._id} post={post} />)
                 }
             </Stack>
         </div>
