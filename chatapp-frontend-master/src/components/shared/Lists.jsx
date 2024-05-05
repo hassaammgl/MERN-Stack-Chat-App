@@ -30,6 +30,7 @@ const Lists = ({ category }) => {
             }
             
            } )
+        // console.log("hassaam",filteredData);
         console.log(filteredData);
     }
     useEffect(() => {
