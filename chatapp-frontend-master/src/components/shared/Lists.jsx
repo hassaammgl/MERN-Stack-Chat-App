@@ -90,7 +90,7 @@ const PostListItem = ({ post }) => {
         <>
             <div >
                 <Box onClick={handlePostClick}>
-                    <Stack style={{ padding: "2rem 1rem",cursor:"pointer", boxShadow: "rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px" }} spacing={1} marginX={"6.5rem"} direction={"row"}>
+                    <Stack style={{ padding: "2rem 1rem", cursor: "pointer", boxShadow: "rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px" }} spacing={1} marginX={"6.5rem"} direction={"row"}>
                         <Box paddingRight={"3rem"}>
                             <img src={post.attachments[0].url} alt={post.title} style={{ borderRadius: "5px" }} width="450px" height="250px" />
                         </Box>
@@ -117,13 +117,13 @@ const PostListItem = ({ post }) => {
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
-                <Stack spacing={1} sx={style} style={{ height: "88%" , cursor:"pointer"}}>
+                <Stack spacing={1} sx={style} style={{ height: "88%", cursor: "pointer" }}>
                     <Stack direction="row" alignItems={"center"} gap={"1rem"}>
                         <Avatar src={post.author.avatar.url} />
                         <Typography variant="body2" fontWeight={"bold"} color={"text.secondary"}>{post.author.name}</Typography>
                         <Stack position={"absolute"} top={"2.5rem"} right={"2.5rem"} >
                             <IconButton onClick={handleChatClick}>
-                                <ChatIcon />
+                             {(post.author._id !== user._id) && <ChatIcon />}
                             </IconButton>
                         </Stack>
                     </Stack>
