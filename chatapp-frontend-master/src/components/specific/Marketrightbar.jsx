@@ -14,7 +14,7 @@ const Marketrightbar = ({ setter }) => {
     }
     return (
         <Stack padding={"0.5rem"} >
-            <Stack >
+            <Stack>
                 <IconBtn onClick={() => setter("books")} title={"Books"} icon={<MenuBookIcon style={{ color: "white" }} />} />
                 <IconBtn onClick={() => setter("tools")} title={"Tools"} icon={<HandymanIcon style={{ color: "white" }} />} />
                 <IconBtn onClick={() => setter("summary")} title={"Summary/Notes"} icon={<ChecklistRtlIcon style={{ color: "white" }} />} />
@@ -29,7 +29,7 @@ const Marketrightbar = ({ setter }) => {
 
 const IconBtn = ({ title, icon, onClick, value }) => {
     return (
-        <Tooltip title={title}>
+        <Tooltip title={title} style={{marginBottom:"2.5rem"}}>
             <IconButton color="white" size="large" onClick={onClick}>
                 {value ? (
                     <Badge badgeContent={value} color="error">

@@ -174,4 +174,4 @@ const AddPosts = ({ open, handlePostClick }) => {
     )
 }
 
-export default AddPosts
+export default AddPosts;
