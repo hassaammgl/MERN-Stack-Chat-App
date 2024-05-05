@@ -20,16 +20,16 @@ const Marketrightbar = ({ setter }) => {
                 <IconBtn onClick={() => setter("summary")} title={"Summary/Notes"} icon={<ChecklistRtlIcon style={{ color: "white" }} />} />
             </Stack>
             <Stack position={"absolute"} right={16} bottom={5} >
-                <IconBtn onClick={handlePostClick} title={"Add Post"} icon={<AddIcon style={{ color: "white" }} />} />
+                <IconBtn onClick={handlePostClick} bottom={true} title={"Add Post"} icon={<AddIcon style={{ color: "white" }} />} />
             </Stack>
-            <AddPosts open={open} handlePostClick={handlePostClick} />
+            <AddPosts open={open} setOpen={setOpen} handlePostClick={handlePostClick} />
         </Stack>
     )
 }
 
-const IconBtn = ({ title, icon, onClick, value }) => {
+const IconBtn = ({ title, icon, onClick, value ,bottom=false }) => {
     return (
-        <Tooltip title={title} style={{marginBottom:"2.5rem"}}>
+        <Tooltip title={title} style={{marginBottom: bottom ? "1rem" : "2rem" }}>
             <IconButton color="white" size="large" onClick={onClick}>
                 {value ? (
                     <Badge badgeContent={value} color="error">

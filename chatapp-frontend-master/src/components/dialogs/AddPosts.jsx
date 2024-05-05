@@ -6,7 +6,7 @@ import { useSelector } from "react-redux"
 import toast from "react-hot-toast";
 
 
-const AddPosts = ({ open, handlePostClick }) => {
+const AddPosts = ({ open, handlePostClick, setOpen }) => {
     const { user } = useSelector((state) => state.auth);
 
     const [values, setValues] = React.useState({
@@ -20,13 +20,20 @@ const AddPosts = ({ open, handlePostClick }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const data = { ...values, image: files };
-        console.log(data);
-        console.log(user);
         toast.loading("Creating post...");
-        const res = await axios.post("http://localhost:3000/api/v1/post/newpost", data);
-        toast.dismiss();
-        toast.success(res.data.message)
-        console.log("res", res);
+        if (data.image.length === 0 || !data.title || !data.description || !data.category) {
+            toast.dismiss();
+            toast.error("Please fill all the required fields");
+            return;
+        }
+        else {
+
+            const res = await axios.post("http://localhost:3000/api/v1/post/newpost", data);
+            toast.dismiss();
+            toast.success(res.data.message)
+            console.log("res", res);
+            setOpen(false);
+        }
 
     }
 
@@ -70,9 +77,8 @@ const AddPosts = ({ open, handlePostClick }) => {
                     boxShadow: 24,
                     p: 4,
                 }}
-                style={{ height: "70%" }}
+                style={{ height: "75%" }}
                 direction={"column"}
-                spacing={6}
             >
                 <Typography variant="h6" component="h2" fontSize={"2.5rem"} fontWeight={"bold"} textAlign={"center"} gutterBottom>
                     Add Post
