@@ -23,19 +23,18 @@ const Lists = ({ category }) => {
         }
     }
     const filterPosts = (category) => {
-        const filteredData = Posts.filter((post) => 
-           {
-            if(post.category === category.toLowerCase){
+        const filteredData = Posts.filter((post) => {
+            if (post.category === category.toLowerCase) {
                 return post
             }
-            
-           } )
+
+        })
         // console.log("hassaam",filteredData);
         console.log(filteredData);
     }
     useEffect(() => {
         getPosts();
-    filterPosts(category);
+        filterPosts(category);
     }, [category]);
     return (
         <div style={{ height: "90vh", overflow: "hidden" }}>
