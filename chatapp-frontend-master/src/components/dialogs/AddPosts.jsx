@@ -70,6 +70,7 @@ const AddPosts = ({ open, handlePostClick }) => {
                     boxShadow: 24,
                     p: 4,
                 }}
+                style={{ height: "70%" }}
                 direction={"column"}
                 spacing={6}
             >
