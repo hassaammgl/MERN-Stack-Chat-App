@@ -117,7 +117,7 @@ const PostListItem = ({ post }) => {
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
-                <Stack spacing={1} sx={style}>
+                <Stack spacing={1} sx={style} style={{ height: "38rem" }}>
                     <Stack direction="row" alignItems={"center"} gap={"1rem"}>
                         <Avatar src={post.author.avatar.url} />
                         <Typography variant="body2" fontWeight={"bold"} color={"text.secondary"}>{post.author.name}</Typography>
@@ -131,7 +131,6 @@ const PostListItem = ({ post }) => {
                     <Typography variant="h6" fontWeight={"bold"}>{post.title}</Typography>
                     {/* <img src={post.image} alt={post.title} style={{ margin: "2rem 0" }} width="700" height="200px" /> */}
                     <Box style={{ margin: "2rem 0", width: '100%', height: '30rem', overflow: 'auto' }}>
-
                         <ImageGallery items={imgs} />
                     </Box>
 
