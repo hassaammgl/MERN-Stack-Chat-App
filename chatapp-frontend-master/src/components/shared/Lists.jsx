@@ -19,7 +19,12 @@ const Lists = ({ category, change }) => {
             const response = await axios.get(`http://localhost:3000/api/v1/post/getpost/${myCatagory}`);
             setPosts(response.data.data);
             toast.dismiss();
-            toast.success("Posts found successfully...");
+            if (response.data.data.length === 0) {
+                toast.error("No posts found...");
+            }
+            else {
+                toast.success("Posts found successfully...");
+            }
             console.log(response.data.data);
         } catch (error) {
             console.error(error);
@@ -32,7 +37,8 @@ const Lists = ({ category, change }) => {
     return (
         <div style={{ height: "90vh", overflow: "hidden" }}>
             <Typography sx={{ textAlign: 'center', fontSize: '3rem', mt: '2.5rem' }} fontWeight={"bolder"}>{category === "Summary" ? "Summary/Notes" : category} Posts</Typography>
-            <Stack sx={{ mb: '3rem', marginX: '5rem', height: '100%', overflow: 'auto', "&::-webkit-scrollbar": { display: 'none' }, }} >
+            <hr style={{ width: '75%',color:"gray" }} />
+            <Stack spacing={3} sx={{ mb: '3rem', marginX: '5rem', height: '100%', overflow: 'auto', "&::-webkit-scrollbar": { display: 'none' }, }} >
                 {
                     Posts.length <= 0 ? <Typography sx={{ textAlign: 'center', fontSize: '2.5rem', mt: '3rem' }} fontWeight={"bolder"}>No Posts</Typography> : Posts.map((post) => <PostListItem key={post._id} post={post} />)
                 }
@@ -70,8 +76,8 @@ const PostListItem = ({ post }) => {
             name: `${post.author.name} ${user.name}`,
             members: [post.author._id, user._id],
         }).then(res => {
-            console.log(res.data.data);
-            navigate(`/chat/${res.data.data}`);
+            console.log(res.data.chatId);
+            navigate(`/chat/${res.data.chatId}`);
         })
     }
 

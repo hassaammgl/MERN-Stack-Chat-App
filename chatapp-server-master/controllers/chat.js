@@ -417,7 +417,7 @@ const BypassNewChat = TryCatch(async (req, res) => {
   console.log('Chat Created', chat);
   return res.status(200).json({
     success: true,
-    data: chat._id.toString(),
+    chatId: chat._id.toString(),
   })
 })
 

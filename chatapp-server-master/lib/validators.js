@@ -109,7 +109,7 @@ const BypassChatValidator = async (req, res, next) => {
       message: "Please Enter Name and Members",
     });
   }
- 
+
 
   if (members[0].toString() === members[1].toString()) {
     return res.status(400).json({
@@ -123,31 +123,22 @@ const BypassChatValidator = async (req, res, next) => {
       message: "Chat must have at least 2 members",
     })
   }
-  const allChats = await Chat.find({});
-
-  // <<<<<<<<<<<<<<  ✨ Codeium Command ⭐ >>>>>>>>>>>>>>>>
-  const chatsWithMembers = await Chat.find({
+  const query = {
     $and: [
-      { members: { $all: members.map(mem => mem._id) } },
-      { groupChat: false }
-    ]
-  });
-  const areInSameChat = chatsWithMembers.some(chat => chat.members.length > 1);
-  if (areInSameChat) {
-    return res.status(400).json({
-      success: false,
-      message: "Members already in a chat",
-      chatId: chatsWithMembers[0]._id
-    });
+      { members: { $size: 2 } }, // Ensures there are exactly 2 members
+      { members: { $all: members } }, // Ensures both specified IDs are present
+    ],
+  };
+  const chat = await Chat.findOne(query);
+  console.log(chat);
+  if (chat === null) {
+    next();
   } else {
-    if (chatsWithMembers.length > 0) {
-      return next({ chatId: chatsWithMembers[0]._id });
-    } else {
-      return next();
-    }
+    return res.status(200).json({
+      success: true,
+      chatId: chat._id.toString(),
+    })
   }
-  // <<<<<<<  49835afd-c7fd-4516-8e0f-a9c896477cca  >>>>>>>
-  next();
 }
 
 export {
