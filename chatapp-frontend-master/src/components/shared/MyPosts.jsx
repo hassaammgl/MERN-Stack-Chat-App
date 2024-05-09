@@ -198,7 +198,7 @@ const EditPost = ({ post, open, handlePostClick, handleSubmit, handleChange, han
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
         >
-            <Stack spacing={1} sx={style} style={{ height: "88%", cursor: "pointer" }}>
+            {/* <Stack spacing={1} sx={style} style={{ height: "88%", cursor: "pointer" }}> */}
 
                 <Stack
                     sx={{
@@ -222,9 +222,9 @@ const EditPost = ({ post, open, handlePostClick, handleSubmit, handleChange, han
                         noValidate
                         autoComplete="off"
                     >
-                        <Stack direction={"row"} spacing={"1rem"} sx={{ marginY: "1rem" }}>
+                        {/* <Stack direction={"row"} spacing={"1rem"} sx={{ marginY: "1rem" }}> */}
                             {/* File input and image display */}
-                        </Stack>
+                        {/* </Stack> */}
                         <TextField
                             variant="outlined"
                             margin="normal"
@@ -262,7 +262,7 @@ const EditPost = ({ post, open, handlePostClick, handleSubmit, handleChange, han
                         </Button>
                     </form>
                 </Stack>
-            </Stack>
+            {/* </Stack> */}
         </Modal>
     );
 };
