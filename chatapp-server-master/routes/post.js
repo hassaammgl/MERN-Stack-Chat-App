@@ -1,5 +1,5 @@
 import express from "express";
-import { createPost, getPostOnCategory, getAllMyPosts, deleteMyPost } from "../controllers/post.js"
+import { createPost, getPostOnCategory, getAllMyPosts, deleteMyPost , updatePost} from "../controllers/post.js"
 import {
     PostValidator, BypassChatValidator
 } from "../lib/validators.js";
@@ -12,5 +12,6 @@ app.get("/getpost/:category", getPostOnCategory);
 app.post("/directchat", BypassChatValidator, BypassNewChat);
 app.get("/myposts/:id", getAllMyPosts);
 app.delete("/delete/:postId",deleteMyPost);
+app.put("/update/:postId", updatePost);
 
 export default app;

@@ -78,7 +78,7 @@ const AddPosts = ({ open, handlePostClick, setOpen, change }) => {
                     boxShadow: 24,
                     p: 4,
                 }}
-                style={{ height: "75%",overflow:"auto" }}
+                style={{ height: "75%", overflow: "auto" }}
                 direction={"column"}
             >
                 <Typography variant="h6" component="h2" fontSize={"2.5rem"} fontWeight={"bold"} textAlign={"center"} gutterBottom>

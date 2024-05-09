@@ -76,10 +76,23 @@ const deleteMyPost = TryCatch(async (req, res) => {
     }
 })
 
+const  updatePost = TryCatch(async (req, res) => {
+    const { postId } = req.params;
+    const { title, description, image } = req.body;
+    let post = await Post.findById(postId);
+    post.title = title;
+    post.description = description;
+    await post.save();
+    return res.status(200).json({
+        success: true,
+        message: "Post updated successfully",
+    });
+})
 
 export {
     getPostOnCategory,
     getAllMyPosts,
     deleteMyPost,
     createPost,
+    updatePost,
 };
