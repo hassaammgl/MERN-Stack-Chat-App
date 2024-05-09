@@ -1,62 +1,14 @@
 import React, { useEffect } from 'react';
 import { Box, Stack, Typography, Modal, Avatar, FormControl, InputLabel, Select, MenuItem, Button, TextField } from '@mui/material';
-import { AddAPhoto } from "@mui/icons-material";
 import axios from "axios";
 import { useState } from 'react';
-import ImageGallery from "react-image-gallery";
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
-import ChatIcon from '@mui/icons-material/Chat';
 
-const MyPosts = ({ open, handlePostClick, setOpen, change }) => {
+const MyPosts = () => {
     const [Posts, setPosts] = useState([]);
     const { user } = useSelector((state) => state.auth);
 
-    const [values, setValues] = React.useState({
-        title: "",
-        description: "",
-        category: "",
-        image: [],
-        user: user._id
-    });
-
-    const [files, setFiles] = React.useState([]);
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        const data = { ...values, image: files };
-        toast.loading("Saving Changes...");
-
-        const res = await axios.post("http://localhost:3000/api/v1/post/newpost", data);
-        toast.dismiss();
-        toast.success(res.data.message);
-        console.log("res", res);
-        setOpen(false);
-        change.setChange(!change.change);
-    };
-
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setValues({
-            ...values,
-            [name]: value,
-        });
-    };
-
-    const handleFileInput = (event) => {
-        const fileList = Array.from(event.target.files);
-        const newFiles = fileList.reduce((acc, curr) => {
-            const reader = new FileReader();
-            reader.onload = () => {
-                acc.push(reader.result);
-                setFiles(prevFiles => [...prevFiles, reader.result]);
-            };
-            reader.readAsDataURL(curr);
-            return acc;
-        }, []);
-    };
 
     const getPosts = async () => {
         try {
@@ -84,7 +36,7 @@ const MyPosts = ({ open, handlePostClick, setOpen, change }) => {
             <Typography sx={{ textAlign: 'center', fontSize: '3rem', mt: '2.5rem' }} fontWeight={"bolder"}>My Posts</Typography>
             <hr style={{ width: '75%', color: "gray" }} />
             <Stack spacing={3} sx={{ mb: '3rem', marginX: '5rem', height: '100%', overflow: 'auto', "&::-webkit-scrollbar": { display: 'none' }, }} >
-                {Posts.length <= 0 ? <Typography sx={{ textAlign: 'center', fontSize: '2.5rem', mt: '3rem' }} fontWeight={"bolder"}>No Posts</Typography> : Posts.map((post) => <PostListItem change={change} key={post._id} post={post} handleSubmit={handleSubmit} handleChange={handleChange} handleFileInput={handleFileInput} />)}
+                {Posts.length <= 0 ? <Typography sx={{ textAlign: 'center', fontSize: '2.5rem', mt: '3rem' }} fontWeight={"bolder"}>No Posts</Typography> : Posts.map((post) => <PostListItem key={post._id} post={post} />)}
             </Stack>
         </div>
     );
@@ -101,7 +53,7 @@ const style = {
     p: 4,
 };
 
-const PostListItem = ({ post, handleSubmit, handleChange, handleFileInput }) => {
+const PostListItem = ({ post }) => {
     const { user } = useSelector((state) => state.auth);
     const [open, setOpen] = React.useState(false);
     const [imgs, setImgs] = React.useState([]);
@@ -165,39 +117,38 @@ const PostListItem = ({ post, handleSubmit, handleChange, handleFileInput }) => 
                     </Stack>
                 </Box>
             </div>
-            <EditPost post={post} open={open} handlePostClick={handlePostClick} handleSubmit={handleSubmit} handleChange={handleChange} handleFileInput={handleFileInput} isChange={{ isChange, setIsChange }} />
+            <EditPost post={post} open={open} setOpen={setOpen} handlePostClick={handlePostClick} isChange={{ isChange, setIsChange }} />
         </>
     );
 };
 
-const EditPost = ({ post, open, handlePostClick, isChange }) => {
+const EditPost = ({ post, open, handlePostClick, isChange, setOpen }) => {
     const [newDescription, setNewDescription] = useState(post.description);
     const [newTitle, setNewTitle] = useState(post.title);
     const [newCategory, setNewCategory] = useState(post.category);
 
+    const handleSubmit = async (e) => {
 
-    // const handleFileInput = (event) => {
-    //     const fileList = Array.from(event.target.files)
-    //     const newFiles = fileList.reduce((acc, curr) => {
-    //         const reader = new FileReader()
-    //         reader.onload = () => {
-    //             acc.push(reader.result)
-    //             setFiles(prevFiles => [...prevFiles, reader.result])
-    //         }
-    //         reader.readAsDataURL(curr)
-    //         console.log(files);
-    //         return acc
-    //     }, [])
-    //     console.log(newFiles);
+        e.preventDefault();
 
-    // }
-
-    const handleSubmit = async () => {
         toast.loading("Updating Post...");
         await axios.put(`http://localhost:3000/api/v1/post/update/${post._id}`, {
             description: newDescription,
             title: newTitle,
             category: newCategory
+        }).then(response => {
+            console.log(response);
+            if (response.data.success === true) {
+                toast.dismiss();
+                toast.success(response.data.message);
+                isChange.setIsChange(!isChange.isChange);
+                setOpen(false);
+            } else {
+                toast.dismiss();
+                toast.error(response.data.message);
+            }
+        }).catch(error => {
+            console.error(error);
         })
     }
 

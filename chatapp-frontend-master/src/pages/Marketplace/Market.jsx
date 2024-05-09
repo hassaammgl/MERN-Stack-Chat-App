@@ -18,7 +18,7 @@ const Market = () => {
             <Header />
             <Grid container height={"calc(100vh - 4rem)"}>
                 <Grid item  height={"100%"} xs={11.4} sm={11.4} md={11.4} lg={11.4}>
-                  {showMyPost ?<MyPosts change={{ change, setChange }}/> : <Lists change={{ change, setChange }} category={category} />}
+                  {showMyPost ?<MyPosts /> : <Lists change={{ change, setChange }} category={category} />}
                 </Grid>
                 <Grid item md={0.6} lg={0.6} sx={{ bgcolor: "rgba(0,0,0,0.85)", }}                >
                     <Marketrightbar show={setShowMyPost} change={{ change, setChange }} setter={setCategory} />
