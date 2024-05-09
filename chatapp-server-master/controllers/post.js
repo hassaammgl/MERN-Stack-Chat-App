@@ -76,49 +76,22 @@ const deleteMyPost = TryCatch(async (req, res) => {
     }
 })
 
-// const updatePost = TryCatch(async (req, res) => {
-//     const { postId } = req.params;
-//     const { title, description, image } = req.body;
-//     let post = await Post.findByIdAndUpdate(post.image,{_id:postId},{});
-//     post.title = title;
-//     post.description = description;
-//     await post.save();
-//     return res.status(200).json({
-//         success: true,
-//         message: "Post updated successfully",
-//     });
-// })
 
-// const updatePost = TryCatch(async (req, res) => {
-//     const { postId } = req.params;
-//     const { title, description, image } = req.body;
-
-//     let post = await Post.findByIdAndUpdate({postId}, { title, description, image }, { new: true });
-//     post.title = title;
-//         post.description = description;
-//         await post.save();
-//         return res.status(200).json({
-//             success: true,
-//             message: "Post updated successfully",
-//         });
-// });
 
 const updatePost = TryCatch(async (req, res) => {
     const { postId } = req.params;
-    const { title, description, image } = req.body;
-    //     let post = await Post.findById(postId);
+    const { title, description, category,attachments } = req.body;
     let post = await Post.findById(postId);
     let post2 = await Post.findByIdAndUpdate(postId, {
         title,
         description,
-        image: image ? image : (post ? post.image : null)
+        category,
+        image: post.image
     }, { new: true });
+    console.log("Previus Post", post);
+    console.log("Post updated", post2);
+    await post2.save();
 
-    // +    let post2 = await Post.findByIdAndUpdate(postId, { title, description, image: image ? image : post.image }, { new: true });
-    // -    let post2 = await Post.findByIdAndUpdate(postId, { title, description, post.image }, { new: true });
-    post.title = title;
-    post.description = description;
-    await post.save();
     return res.status(200).json({
         success: true,
         message: "Post updated successfully",

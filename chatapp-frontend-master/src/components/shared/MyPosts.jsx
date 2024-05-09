@@ -101,10 +101,11 @@ const style = {
     p: 4,
 };
 
-const PostListItem = ({ post, change, handleSubmit, handleChange, handleFileInput }) => {
+const PostListItem = ({ post, handleSubmit, handleChange, handleFileInput }) => {
     const { user } = useSelector((state) => state.auth);
     const [open, setOpen] = React.useState(false);
     const [imgs, setImgs] = React.useState([]);
+    const [isChange, setIsChange] = useState(false);
 
 
     React.useEffect(() => {
@@ -113,7 +114,7 @@ const PostListItem = ({ post, change, handleSubmit, handleChange, handleFileInpu
             thumbnail: attachment.url + '?thumbnail'
         }));
         setImgs(urls);
-    }, [post.attachments]);
+    }, [post.attachments, isChange]);
 
     const handlePostClick = () => {
         setOpen(open ? false : true);
@@ -126,7 +127,7 @@ const PostListItem = ({ post, change, handleSubmit, handleChange, handleFileInpu
             if (res.data.success === true) {
                 toast.dismiss();
                 toast.success(res.data.message);
-                change.setChange(!change.change);
+                setIsChange(!isChange);
             } else {
                 toast.dismiss();
                 toast.error(res.data.message);
@@ -164,14 +165,41 @@ const PostListItem = ({ post, change, handleSubmit, handleChange, handleFileInpu
                     </Stack>
                 </Box>
             </div>
-            <EditPost post={post} open={open} handlePostClick={handlePostClick} handleSubmit={handleSubmit} handleChange={handleChange} handleFileInput={handleFileInput} />
+            <EditPost post={post} open={open} handlePostClick={handlePostClick} handleSubmit={handleSubmit} handleChange={handleChange} handleFileInput={handleFileInput} isChange={{ isChange, setIsChange }} />
         </>
     );
 };
 
-const EditPost = ({ post, open, handlePostClick, handleSubmit, handleChange, handleFileInput }) => {
+const EditPost = ({ post, open, handlePostClick, isChange }) => {
     const [newDescription, setNewDescription] = useState(post.description);
     const [newTitle, setNewTitle] = useState(post.title);
+    const [newCategory, setNewCategory] = useState(post.category);
+
+
+    // const handleFileInput = (event) => {
+    //     const fileList = Array.from(event.target.files)
+    //     const newFiles = fileList.reduce((acc, curr) => {
+    //         const reader = new FileReader()
+    //         reader.onload = () => {
+    //             acc.push(reader.result)
+    //             setFiles(prevFiles => [...prevFiles, reader.result])
+    //         }
+    //         reader.readAsDataURL(curr)
+    //         console.log(files);
+    //         return acc
+    //     }, [])
+    //     console.log(newFiles);
+
+    // }
+
+    const handleSubmit = async () => {
+        toast.loading("Updating Post...");
+        await axios.put(`http://localhost:3000/api/v1/post/update/${post._id}`, {
+            description: newDescription,
+            title: newTitle,
+            category: newCategory
+        })
+    }
 
     return (
         <Modal
@@ -202,6 +230,36 @@ const EditPost = ({ post, open, handlePostClick, handleSubmit, handleChange, han
                     noValidate
                     autoComplete="off"
                 >
+                    {/* <Stack direction={"row"} spacing={"1rem"} sx={{ marginY: "1rem" }}>
+                        {newImages?.map((file, index) => (
+                            <img
+                                key={index}
+                                src={file}
+                                style={{ width: '100px', height: '100px', objectFit: 'cover', borderRadius: "10px" }}
+                            />
+                        ))}
+                        <input
+                            type="file"
+                            name="attachments"
+                            id="attachments"
+                            accept="image/*"
+                            multiple
+                            onChange={handleFileInput}
+                            style={{ display: 'none' }}
+                        />
+                        <label htmlFor="attachments">
+                            <Button
+                                variant="contained"
+                                component="span"
+                                disabled={newImages?.length === 5 ? true : false}
+                                sx={{ width: '100px', height: '100px' }}
+                            >
+                                <AddAPhoto
+                                    sx={{ width: '70px', height: '70px' }}
+                                />
+                            </Button>
+                        </label>
+                    </Stack> */}
                     <TextField
                         variant="outlined"
                         margin="normal"
@@ -229,12 +287,24 @@ const EditPost = ({ post, open, handlePostClick, handleSubmit, handleChange, han
                         onChange={(e) => setNewDescription(e.target.value)}
                     />
                     <FormControl
-                        variant="outlined"
-                        fullWidth
-                        required
-                        sx={{ marginBottom: '2rem' }}
-                    >
-                        {/* Category select */}
+                        sx={{
+                            marginBottom: '2rem',
+                        }}
+                        variant="outlined" fullWidth>
+                        <InputLabel htmlFor="category">Category</InputLabel>
+                        <Select
+                            required
+                            labelId="category"
+                            id="category"
+                            name="category"
+                            value={newCategory}
+                            label="Category"
+                            onChange={(e) => setNewCategory(e.target.value)}
+                        >
+                            <MenuItem value="books">Books</MenuItem>
+                            <MenuItem value="summary">Summary</MenuItem>
+                            <MenuItem value="tools">Tools</MenuItem>
+                        </Select>
                     </FormControl>
                     <Button type="submit" fullWidth variant="contained">
                         Submit Changes
