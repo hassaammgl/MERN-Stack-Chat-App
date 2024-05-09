@@ -46,9 +46,40 @@ const getPostOnCategory = TryCatch(async (req, res) => {
     });
 });
 
+const getAllMyPosts = TryCatch(async (req, res) => {
+    // console.log("id: ", req.params.id);
+    const { id } = req.params;
+    let posts = await Post.find({ author: id }).populate("author", "name avatar _id");
+    console.log(posts);
+    return res.status(200).json({
+        success: true,
+        data: posts,
+    });
+})
+
+const deleteMyPost = TryCatch(async (req, res) => {
+    console.log("id: ", req.params.postId);
+    const { postId } = req.params;
+    let post = await Post.findByIdAndDelete({ _id: postId })
+    console.log("posts for del", post);
+    if(post === null || post === undefined){
+        return res.status(404).json({
+            success: false,
+            message: "Post not found",
+        });
+    }  
+    else{
+        return res.status(200).json({
+            success: true,
+            message: "Post deleted successfully",
+        });
+    }
+})
 
 
 export {
     getPostOnCategory,
+    getAllMyPosts,
+    deleteMyPost,
     createPost,
 };

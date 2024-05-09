@@ -106,7 +106,6 @@ const PostListItem = ({ post }) => {
                                 Posted at: {post.createdAt?.substring(0, 10)}
                             </Typography>
                         </Box>
-                        <br />
                     </Stack>
                 </Box>
             </div>
@@ -128,7 +127,6 @@ const PostListItem = ({ post }) => {
                     </Stack>
 
                     <Typography variant="h6" fontWeight={"bold"}>{post.title}</Typography>
-                    {/* <img src={post.image} alt={post.title} style={{ margin: "2rem 0" }} width="700" height="200px" /> */}
                     <Box style={{ margin: "2rem 0", width: '100%', height: '28rem', overflow: 'auto' }}>
                         <ImageGallery items={imgs} />
                     </Box>
