@@ -62,13 +62,13 @@ const deleteMyPost = TryCatch(async (req, res) => {
     const { postId } = req.params;
     let post = await Post.findByIdAndDelete({ _id: postId })
     console.log("posts for del", post);
-    if(post === null || post === undefined){
+    if (post === null || post === undefined) {
         return res.status(404).json({
             success: false,
             message: "Post not found",
         });
-    }  
-    else{
+    }
+    else {
         return res.status(200).json({
             success: true,
             message: "Post deleted successfully",
@@ -76,10 +76,46 @@ const deleteMyPost = TryCatch(async (req, res) => {
     }
 })
 
-const  updatePost = TryCatch(async (req, res) => {
+// const updatePost = TryCatch(async (req, res) => {
+//     const { postId } = req.params;
+//     const { title, description, image } = req.body;
+//     let post = await Post.findByIdAndUpdate(post.image,{_id:postId},{});
+//     post.title = title;
+//     post.description = description;
+//     await post.save();
+//     return res.status(200).json({
+//         success: true,
+//         message: "Post updated successfully",
+//     });
+// })
+
+// const updatePost = TryCatch(async (req, res) => {
+//     const { postId } = req.params;
+//     const { title, description, image } = req.body;
+
+//     let post = await Post.findByIdAndUpdate({postId}, { title, description, image }, { new: true });
+//     post.title = title;
+//         post.description = description;
+//         await post.save();
+//         return res.status(200).json({
+//             success: true,
+//             message: "Post updated successfully",
+//         });
+// });
+
+const updatePost = TryCatch(async (req, res) => {
     const { postId } = req.params;
     const { title, description, image } = req.body;
+    //     let post = await Post.findById(postId);
     let post = await Post.findById(postId);
+    let post2 = await Post.findByIdAndUpdate(postId, {
+        title,
+        description,
+        image: image ? image : (post ? post.image : null)
+    }, { new: true });
+
+    // +    let post2 = await Post.findByIdAndUpdate(postId, { title, description, image: image ? image : post.image }, { new: true });
+    // -    let post2 = await Post.findByIdAndUpdate(postId, { title, description, post.image }, { new: true });
     post.title = title;
     post.description = description;
     await post.save();
@@ -87,7 +123,8 @@ const  updatePost = TryCatch(async (req, res) => {
         success: true,
         message: "Post updated successfully",
     });
-})
+});
+
 
 export {
     getPostOnCategory,

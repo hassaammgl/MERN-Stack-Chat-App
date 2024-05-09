@@ -26,7 +26,7 @@ const MyPosts = ({ open, handlePostClick, setOpen, change }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const data = { ...values, image: files };
-        toast.loading("Creating post...");
+        toast.loading("Saving Changes...");
 
         const res = await axios.post("http://localhost:3000/api/v1/post/newpost", data);
         toast.dismiss();
