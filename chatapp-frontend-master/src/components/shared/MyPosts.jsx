@@ -23,30 +23,11 @@ const MyPosts = ({ open, handlePostClick, setOpen, change }) => {
 
     const [files, setFiles] = React.useState([]);
 
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
-    //     const data = { ...values, image: files };
-    //     toast.loading("Creating post...");
-    //     if (data.image.length === 0 || !data.title || !data.description || !data.category) {
-    //         toast.dismiss();
-    //         toast.error("Please fill all the required fields");
-    //         return;
-    //     } else {
-    //         const res = await axios.post("http://localhost:3000/api/v1/post/newpost", data);
-    //         toast.dismiss();
-    //         toast.success(res.data.message);
-    //         console.log("res", res);
-    //         setOpen(false);
-    //         change.setChange(!change.change);
-    //     }
-    // };
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         const data = { ...values, image: files };
         toast.loading("Creating post...");
-        
-        // Remove the condition for required fields
+
         const res = await axios.post("http://localhost:3000/api/v1/post/newpost", data);
         toast.dismiss();
         toast.success(res.data.message);
@@ -54,7 +35,7 @@ const MyPosts = ({ open, handlePostClick, setOpen, change }) => {
         setOpen(false);
         change.setChange(!change.change);
     };
-    
+
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -73,10 +54,8 @@ const MyPosts = ({ open, handlePostClick, setOpen, change }) => {
                 setFiles(prevFiles => [...prevFiles, reader.result]);
             };
             reader.readAsDataURL(curr);
-            console.log(files);
             return acc;
         }, []);
-        console.log(newFiles);
     };
 
     const getPosts = async () => {
@@ -126,6 +105,8 @@ const PostListItem = ({ post, change, handleSubmit, handleChange, handleFileInpu
     const { user } = useSelector((state) => state.auth);
     const [open, setOpen] = React.useState(false);
     const [imgs, setImgs] = React.useState([]);
+
+
     React.useEffect(() => {
         const urls = post.attachments.map(attachment => ({
             original: attachment.url,
@@ -146,13 +127,11 @@ const PostListItem = ({ post, change, handleSubmit, handleChange, handleFileInpu
                 toast.dismiss();
                 toast.success(res.data.message);
                 change.setChange(!change.change);
-                // window.location.reload();
             } else {
                 toast.dismiss();
                 toast.error(res.data.message);
             }
         });
-        // toast.dismiss();
     };
 
     return (
@@ -191,6 +170,9 @@ const PostListItem = ({ post, change, handleSubmit, handleChange, handleFileInpu
 };
 
 const EditPost = ({ post, open, handlePostClick, handleSubmit, handleChange, handleFileInput }) => {
+    const [newDescription, setNewDescription] = useState(post.description);
+    const [newTitle, setNewTitle] = useState(post.title);
+
     return (
         <Modal
             open={open}
@@ -198,71 +180,67 @@ const EditPost = ({ post, open, handlePostClick, handleSubmit, handleChange, han
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
         >
-            {/* <Stack spacing={1} sx={style} style={{ height: "88%", cursor: "pointer" }}> */}
-
-                <Stack
-                    sx={{
-                        position: 'absolute',
-                        top: '50%',
-                        left: '50%',
-                        transform: 'translate(-50%, -50%)',
-                        bgcolor: 'background.paper',
-                        boxShadow: 24,
-                        p: 4,
-                    }}
-                    style={{ height: "75%", overflow: "auto" }}
-                    direction={"column"}
+            <Stack
+                sx={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    bgcolor: 'background.paper',
+                    boxShadow: 24,
+                    p: 4,
+                }}
+                style={{ height: "75%", overflow: "auto" }}
+                direction={"column"}
+            >
+                <Typography variant="h6" component="h2" fontSize={"2.5rem"} fontWeight={"bold"} textAlign={"center"} gutterBottom>
+                    Edit Post
+                </Typography>
+                <form
+                    encType="multipart/form-data"
+                    onSubmit={handleSubmit}
+                    noValidate
+                    autoComplete="off"
                 >
-                    <Typography variant="h6" component="h2" fontSize={"2.5rem"} fontWeight={"bold"} textAlign={"center"} gutterBottom>
-                        Edit Post
-                    </Typography>
-                    <form
-                        encType="multipart/form-data"
-                        onSubmit={handleSubmit}
-                        noValidate
-                        autoComplete="off"
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="title"
+                        label="Title"
+                        name="title"
+                        value={newTitle}
+                        autoFocus
+                        onChange={(e) => setNewTitle(e.target.value)}
+                    />
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        multiline
+                        rows={4}
+                        id="description"
+                        label="Description"
+                        name="description"
+                        value={newDescription}
+                        autoFocus
+                        onChange={(e) => setNewDescription(e.target.value)}
+                    />
+                    <FormControl
+                        variant="outlined"
+                        fullWidth
+                        required
+                        sx={{ marginBottom: '2rem' }}
                     >
-                        {/* <Stack direction={"row"} spacing={"1rem"} sx={{ marginY: "1rem" }}> */}
-                            {/* File input and image display */}
-                        {/* </Stack> */}
-                        <TextField
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="title"
-                            label="Title"
-                            name="title"
-                            autoFocus
-                            onChange={handleChange}
-                        />
-                        <TextField
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            fullWidth
-                            multiline
-                            rows={4}
-                            id="description"
-                            label="Description"
-                            name="description"
-                            autoFocus
-                            onChange={handleChange}
-                        />
-                        <FormControl
-                            variant="outlined"
-                            fullWidth
-                            required
-                            sx={{ marginBottom: '2rem' }}
-                        >
-                            {/* Category select */}
-                        </FormControl>
-                        <Button type="submit" fullWidth variant="contained">
-                            Submit Changes
-                        </Button>
-                    </form>
-                </Stack>
-            {/* </Stack> */}
+                        {/* Category select */}
+                    </FormControl>
+                    <Button type="submit" fullWidth variant="contained">
+                        Submit Changes
+                    </Button>
+                </form>
+            </Stack>
         </Modal>
     );
 };
